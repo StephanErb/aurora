@@ -236,7 +236,7 @@ above multiple `Process` definitions into just two.
 
     run_task = SequentialTask(processes = [stage, run])
 
-`Process` also has optional attributes to customize its behaviour. Details can be found in the [*Aurora+Thermos Configuration Reference*](configuration-reference.md).
+`Process` also has optional attributes to customize its behaviour. Details can be found in the [*Aurora+Thermos Configuration Reference*](configuration-reference.md#process-objects).
 
 
 ## Getting Your Code Into The Sandbox
@@ -297,7 +297,7 @@ A basic Task definition looks like:
                             ram = 1*GB,
                             disk = 1*GB))
 
-A Task has optional attributes to customize its behaviour. Details can be found in the [*Aurora+Thermos Configuration Reference*](configuration-reference.md)
+A Task has optional attributes to customize its behaviour. Details can be found in the [*Aurora+Thermos Configuration Reference*](configuration-reference.md#task-object)
 
 
 ### SequentialTask: Running Processes in Parallel or Sequentially
@@ -454,7 +454,7 @@ default. For these four parameters, a Job definition might look like:
               task = foo_task)
 
 In addition to the required attributes, there are several optional
-attributes. Details can be found in the [Aurora+Thermos Configuration Reference](configuration-reference.md).
+attributes. Details can be found in the [Aurora+Thermos Configuration Reference](configuration-reference.md#job-objects).
 
 
 ## The jobs List
