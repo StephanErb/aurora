@@ -236,57 +236,8 @@ above multiple `Process` definitions into just two.
 
     run_task = SequentialTask(processes = [stage, run])
 
-`Process` also has five optional attributes, each with a default value
-if one isn't specified in the configuration:
+`Process` also has optional attributes to customize its behaviour. Details can be found in the [*Aurora+Thermos Configuration Reference*](configuration-reference.md).
 
--   `max_failures`: Defaulting to `1`, the maximum number of failures
-    (non-zero exit statuses) before this `Process` is marked permanently
-    failed and not retried. If a `Process` permanently fails, Thermos
-    checks the `Process` object's containing `Task` for the task's
-    failure limit (usually 1) to determine whether or not the `Task`
-    should be failed. Setting `max_failures`to `0` means that this
-    process will keep retrying until a successful (zero) exit status is
-    achieved. Retries happen at most once every `min_duration` seconds
-    to prevent effectively mounting a denial of service attack against
-    the coordinating scheduler.
-
--   `daemon`: Defaulting to `False`, if `daemon` is set to `True`, a
-    successful (zero) exit status does not prevent future process runs.
-    Instead, the `Process` reinvokes after `min_duration` seconds.
-    However, the maximum failure limit (`max_failures`) still
-    applies. A combination of `daemon=True` and `max_failures=0` retries
-    a `Process` indefinitely regardless of exit status. This should
-    generally be avoided for very short-lived processes because of the
-    accumulation of checkpointed state for each process run. When
-    running in Aurora, `max_failures` is capped at
-    100.
-
--   `ephemeral`: Defaulting to `False`, if `ephemeral` is `True`, the
-    `Process`' status is not used to determine if its bound `Task` has
-    completed. For example, consider a `Task` with a
-    non-ephemeral webserver process and an ephemeral logsaver process
-    that periodically checkpoints its log files to a centralized data
-    store. The `Task` is considered finished once the webserver process
-    finishes, regardless of the logsaver's current status.
-
--   `min_duration`: Defaults to `15`. Processes may succeed or fail
-    multiple times during a single Task. Each result is called a
-    *process run* and this value is the minimum number of seconds the
-    scheduler waits before re-running the same process.
-
--   `final`: Defaulting to `False`, this is a finalizing `Process` that
-    should run last. Processes can be grouped into two classes:
-    *ordinary* and *finalizing*. By default, Thermos Processes are
-    ordinary. They run as long as the `Task` is considered
-    healthy (i.e. hasn't reached a failure limit). But once all regular
-    Thermos Processes have either finished or the `Task` has reached a
-    certain failure threshold, Thermos moves into a *finalization* stage
-    and runs all finalizing Processes. These are typically necessary for
-    cleaning up after the `Task`, such as log checkpointers, or perhaps
-    e-mail notifications of a completed Task. Finalizing processes may
-    not depend upon ordinary processes or vice-versa, however finalizing
-    processes may depend upon other finalizing processes and will
-    otherwise run as a typical process schedule.
 
 ## Getting Your Code Into The Sandbox
 
