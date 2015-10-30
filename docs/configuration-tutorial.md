@@ -297,59 +297,8 @@ A basic Task definition looks like:
                             ram = 1*GB,
                             disk = 1*GB))
 
-There are four optional Task attributes:
+A Task has optional attributes to customize its behaviour. Details can be found in the [*Aurora+Thermos Configuration Reference*](configuration-reference.md)
 
--   `constraints`: A list of `Constraint` objects that constrain the
-    Task's processes. Currently there is only one type, the `order`
-    constraint. For example the following requires that the processes
-    run in the order `foo`, then `bar`.
-
-        constraints = [Constraint(order=['foo', 'bar'])]
-
-    There is an `order()` function that takes `order('foo', 'bar', 'baz')`
-    and converts it into `[Constraint(order=['foo', 'bar', 'baz'])]`.
-    `order()` accepts Process name strings `('foo', 'bar')` or the processes
-    themselves, e.g. `foo=Process(name='foo', ...)`, `bar=Process(name='bar', ...)`,
-    `constraints=order(foo, bar)`
-
-    Note that Thermos rejects tasks with process cycles.
-
--   `max_failures`: Defaulting to `1`, the number of failed processes
-    needed for the `Task` to be marked as failed. Note how this
-    interacts with individual Processes' `max_failures` values. Assume a
-    Task has two Processes and a `max_failures` value of `2`. So both
-    Processes must fail for the Task to fail. Now, assume each of the
-    Task's Processes has its own `max_failures` value of `10`. If
-    Process "A" fails 5 times before succeeding, and Process "B" fails
-    10 times and is then marked as failing, their parent Task succeeds.
-    Even though there were 15 individual failures by its Processes, only
-    1 of its Processes was finally marked as failing. Since 1 is less
-    than the 2 that is the Task's `max_failures` value, the Task does
-    not fail.
-
--   `max_concurrency`: Defaulting to `0`, the maximum number of
-    concurrent processes in the Task. `0` specifies unlimited
-    concurrency. For Tasks with many expensive but otherwise independent
-    processes, you can limit the amount of concurrency Thermos schedules
-    instead of artificially constraining them through `order`
-    constraints. For example, a test framework may generate a Task with
-    100 test run processes, but runs it in a Task with
-    `resources.cpus=4`. Limit the amount of parallelism to 4 by setting
-    `max_concurrency=4`.
-
--   `finalization_wait`: Defaulting to `30`, the number of seconds
-    allocated for finalizing the Task's processes. A Task starts in
-    `ACTIVE` state when Processes run and stays there as long as the Task
-    is healthy and Processes run. When all Processes finish successfully
-    or the Task reaches its maximum process failure limit, it goes into
-    `CLEANING` state. In `CLEANING`, it sends `SIGTERMS` to any still running
-    Processes. When all Processes terminate, the Task goes into
-    `FINALIZING` state and invokes the schedule of all processes whose
-    final attribute has a True value. Everything from the end of `ACTIVE`
-    to the end of `FINALIZING` must happen within `finalization_wait`
-    number of seconds. If not, all still running Processes are sent
-    `SIGKILL`s (or if dependent on yet to be completed Processes, are
-    never invoked).
 
 ### SequentialTask: Running Processes in Parallel or Sequentially
 
