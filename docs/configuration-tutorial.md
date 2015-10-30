@@ -454,77 +454,8 @@ default. For these four parameters, a Job definition might look like:
               task = foo_task)
 
 In addition to the required attributes, there are several optional
-attributes. The first (strongly recommended) optional attribute is:
+attributes. Details can be found in the [Aurora+Thermos Configuration Reference](configuration-reference.md).
 
--   `contact`: An email address for the Job's owner. For production
-    jobs, it is usually a team mailing list.
-
-Two more attributes deal with how to handle failure of the Job's Task:
-
--   `max_task_failures`: An integer, defaulting to `1`, of the maximum
-    number of Task failures after which the Job is considered failed.
-    `-1` allows for infinite failures.
-
--   `service`: A boolean, defaulting to `False`, which if `True`
-    restarts tasks regardless of whether they succeeded or failed. In
-    other words, if `True`, after the Job's Task completes, it
-    automatically starts again. This is for Jobs you want to run
-    continuously, rather than doing a single run.
-
-Three attributes deal with configuring the Job's Task:
-
--   `instances`: Defaulting to `1`, the number of
-    instances/replicas/shards of the Job's Task to create.
-
--   `priority`: Defaulting to `0`, the Job's Task's preemption priority,
-    for which higher values may preempt Tasks from Jobs with lower
-    values.
-
--   `production`: a Boolean, defaulting to `False`, specifying that this
-    is a [production](configuration-reference.md#job-objects) job.
-
-The final three Job attributes each take an object as their value.
-
--   `update_config`: An `UpdateConfig`
-    object provides parameters for controlling the rate and policy of
-    rolling updates. The `UpdateConfig` parameters are:
-    -   `batch_size`: An integer, defaulting to `1`, specifying the
-        maximum number of shards to update in one iteration.
-    -   `restart_threshold`: An integer, defaulting to `60`, specifying
-        the maximum number of seconds before a shard must move into the
-        `RUNNING` state before considered a failure.
-    -   `watch_secs`: An integer, defaulting to `45`, specifying the
-        minimum number of seconds a shard must remain in the `RUNNING`
-        state before considered a success.
-    -   `max_per_shard_failures`: An integer, defaulting to `0`,
-        specifying the maximum number of restarts per shard during an
-        update. When the limit is exceeded, it increments the total
-        failure count.
-    -   `max_total_failures`: An integer, defaulting to `0`, specifying
-        the maximum number of shard failures tolerated during an update.
-        Cannot be equal to or greater than the job's total number of
-        tasks.
--   `health_check_config`: A `HealthCheckConfig` object that provides
-    parameters for controlling a Task's health checks via HTTP. Only
-    used if a health port was assigned with a command line wildcard. The
-    `HealthCheckConfig` parameters are:
-    -   `initial_interval_secs`: An integer, defaulting to `15`,
-        specifying the initial delay for doing an HTTP health check.
-    -   `interval_secs`: An integer, defaulting to `10`, specifying the
-        number of seconds in the interval between checking the Task's
-        health.
-    -   `timeout_secs`: An integer, defaulting to `1`, specifying the
-        number of seconds the application must respond to an HTTP health
-        check with `OK` before it is considered a failure.
-    -   `max_consecutive_failures`: An integer, defaulting to `0`,
-        specifying the maximum number of consecutive failures before a
-        task is unhealthy.
--   `constraints`: A `dict` Python object, specifying Task scheduling
-    constraints. Most users will not need to specify constraints, as the
-    scheduler automatically inserts reasonable defaults. Please do not
-    set this field unless you are sure of what you are doing. See the
-    section in the Aurora + Thermos Reference manual on [Specifying
-    Scheduling Constraints](configuration-reference.md) for more information.
 
 ## The jobs List
 
