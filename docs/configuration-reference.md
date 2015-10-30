@@ -198,6 +198,11 @@ is shorthand for
 
         [Constraint(order = [process1.name(), process2.name()])]
 
+The `order` function accepts Process name strings `('foo', 'bar')` or the processes
+themselves, e.g. `foo=Process(name='foo', ...)`, `bar=Process(name='bar', ...)`,
+`constraints=order(foo, bar)`.
+
+
 #### resources
 
 Takes a `Resource` object, which specifies the amounts of CPU, memory, and disk space resources
@@ -205,10 +210,10 @@ to allocate to the Task.
 
 #### max_failures
 
-`max_failures` is the number of times processes that are part of this
-Task can fail before the entire Task is marked for failure.
+`max_failures` is the number of the number of failed processes needed for the `Task` to be
+marked as failed.
 
-For example:
+For example, assume a Task has two Processes and a `max_failures` value of `2`:
 
         template = Process(max_failures=10)
         task = Task(
@@ -219,11 +224,13 @@ For example:
           ],
           max_failures=2)
 
-The `failing` Process could fail 10 times before being marked as
-permanently failed, and the `succeeding` Process would succeed on the
-first run. The task would succeed despite only allowing for two failed
-processes. To be more specific, there would be 10 failed process runs
-yet 1 failed process.
+The `failing` Process could fail 10 times before being marked as permanently
+failed, and the `succeeding` Process could succeed on the first run. However,
+the task would succeed despite only allowing for two failed processes. To be more
+specific, there would be 10 failed process runs yet 1 failed process. Both processes
+would have to fail for the Task to fail.
+
+
 
 #### max_concurrency
 
