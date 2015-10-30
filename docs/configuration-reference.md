@@ -327,13 +327,13 @@ Job Schema
   ```instances```| Integer | Number of instances (sometimes referred to as replicas or shards) of the task to create. (Default: 1)
    ```cron_schedule``` | String | Cron schedule in cron format. May only be used with non-service jobs. See [Cron Jobs](cron-jobs.md) for more information. Default: None (not a cron job.)
   ```cron_collision_policy``` | String | Policy to use when a cron job is triggered while a previous run is still active. KILL_EXISTING Kill the previous run, and schedule the new run CANCEL_NEW Let the previous run continue, and cancel the new run. (Default: KILL_EXISTING)
-  ```update_config``` | ```update_config``` object | Parameters for controlling the rate and policy of rolling updates.
+  ```update_config``` | ```UpdateConfig``` object | Parameters for controlling the rate and policy of rolling updates.
   ```constraints``` | dict | Scheduling constraints for the tasks. See the section on the [constraint specification language](#Specifying-Scheduling-Constraints)
   ```service``` | Boolean | If True, restart tasks regardless of success or failure. (Default: False)
   ```max_task_failures``` | Integer | Maximum number of failures after which the task is considered to have failed (Default: 1) Set to -1 to allow for infinite failures
   ```priority``` | Integer | Preemption priority to give the task (Default 0). Tasks with higher priorities may preempt tasks at lower priorities.
   ```production``` | Boolean |  Whether or not this is a production task that may [preempt](resources.md#task-preemption) other tasks (Default: False). Production job role must have the appropriate [quota](resources.md#resource-quota).
-  ```health_check_config``` | ```heath_check_config``` object | Parameters for controlling a task's health checks via HTTP. Only used if a  health port was assigned with a command line wildcard.
+  ```health_check_config``` | ```HealthCheckConfig``` object | Parameters for controlling a task's health checks via HTTP. Only used if a  health port was assigned with a command line wildcard.
   ```container``` | ```Container``` object | An optional container to run all processes inside of.
   ```lifecycle``` | ```LifecycleConfig``` object | An optional task lifecycle configuration that dictates commands to be executed on startup/teardown.  HTTP lifecycle is enabled by default if the "health" port is requested.  See [LifecycleConfig Objects](#lifecycleconfig-objects) for more information.
   ```tier``` | String | Task tier type. When set to `revocable` requires the task to run with Mesos revocable resources. This is work [in progress](https://issues.apache.org/jira/browse/AURORA-1343) and is currently only supported for the revocable tasks. The ultimate goal is to simplify task configuration by hiding various configuration knobs behind a task tier definition. See AURORA-1343 and AURORA-1443 for more details.
