@@ -9,6 +9,7 @@
 *.tar export-ignore
 *.tar.gz export-ignore
 
-# Denote all files that are truly binary and should not be modified.
+# All files that are binary and whose line endings should not be modified.
 *.png binary
 *.jpg binary
+*.odg binary
