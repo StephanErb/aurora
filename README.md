@@ -6,51 +6,49 @@ Aurora aims to make it extremely quick and easy to take a built application and 
 in a cluster, with an emphasis on reliability. It provides basic operations to manage services
 running in a cluster, such as rolling upgrades.
 
+
 To very concisely describe Aurora, it is a system that you can instruct to do things like
 _run 100 of these, somewhere, forever_.
 
 https://aurora.apache.org/
 
-- [Features](#features)
-- [Getting Started](#getting-started)
-- [Getting Help](#getting-help)
-- [License](#license)
 
 ## Features
 
-### User-facing
-- Management of long-running services
-- Cron scheduling
-- Resource quotas: provide guaranteed resources for specific applications
-- Rolling job updates, with automatic rollback
-- Multi-user support
-- Sophisticated [DSL](docs/configuration-tutorial.md): supports templating, allowing you to
-  establish common patterns and avoid redundant configurations
-- [Dedicated machines](docs/deploying-aurora-scheduler.md#dedicated-attribute):
-  for things like stateful services that must always run on the same machines
-- Service registration: [announce](docs/configuration-reference.md#announcer-objects) services in
-  [ZooKeeper](http://zookeeper.apache.org/) for discovery by clients like
-  [finagle](https://twitter.github.io/finagle).
-- [Scheduling constraints](docs/configuration-reference.md#specifying-scheduling-constraints)
-  to run on specific machines, or to mitigate impact of issues like machine and rack failure
+* User-facing Features:
+  - Management of long-running services
+  - Cron scheduling
+  - Resource quotas: provide guaranteed resources for specific applications
+  - Rolling job updates, with automatic rollback
+  - Multi-user support
+  - Sophisticated [DSL](docs/configuration-tutorial.md): supports templating, allowing you to
+    establish common patterns and avoid redundant configurations
+  - [Dedicated machines](docs/deploying-aurora-scheduler.md#dedicated-attribute):
+    for things like stateful services that must always run on the same machines
+  - Service registration: [announce](docs/configuration-reference.md#announcer-objects) services in
+    [ZooKeeper](http://zookeeper.apache.org/) for discovery by clients like
+    [finagle](https://twitter.github.io/finagle).
+  - [Scheduling constraints](docs/configuration-reference.md#specifying-scheduling-constraints)
+    to run on specific machines, or to mitigate impact of issues like machine and rack failure
 
-### Under the hood, to help you rest easy
-- Preemption: important services can 'steal' resources when they need it
-- High-availability: resists machine failures and disk failures
-- Scalable: proven to work in data center-sized clusters, with hundreds of users and thousands of
-  jobs
-- Instrumented: a wealth of information makes it easy to [monitor](docs/monitoring.md) and debug
+* Under the hood, to help you rest easy:
+  - Preemption: important services can 'steal' resources when they need it
+  - High-availability: resists machine failures and disk failures
+  - Scalable: proven to work in data center-sized clusters, with hundreds of users and thousands of
+    jobs
+  - Instrumented: a wealth of information makes it easy to [monitor](docs/monitoring.md) and debug
 
-### When to use Aurora
+### When and when not to use Aurora
 Aurora can take over for most uses of software like monit and chef.  Aurora can manage applications,
-while these tools are still useful to manage Aurora and Mesos themselves.
+while these tools are still useful to manage Aurora and Mesos themselves. 
 
-### When to not use Aurora
-If you have very specific scheduling requirements, or are building a system that looks like a
+However, if you have very specific scheduling requirements, or are building a system that looks like a
 scheduler itself, you may want to explore developing your own
 [framework](http://mesos.apache.org/documentation/latest/app-framework-development-guide).
 
 ### Companies using Aurora
+Are you using Aurora too?  Let us know, or submit a patch to join the list!
+
 - [Blue Yonder](http://www.blue-yonder.com)
 - [Boxever](http://www.boxever.com)
 - [Foursquare](https://foursquare.com)
@@ -61,8 +59,6 @@ scheduler itself, you may want to explore developing your own
 - [TellApart](https://www.tellapart.com)
 - [Twitter](https://twitter.com)
 
-Are you using Aurora too?  Let us know, or submit a patch to join the list!
-
 ## Getting Started
 * [Try the tutorial](docs/tutorial.md)
 * [Running a Local Cluster with Vagrant](docs/vagrant.md)
@@ -70,10 +66,8 @@ Are you using Aurora too?  Let us know, or submit a patch to join the list!
 * [Developing Aurora](docs/developing-aurora-scheduler.md)
 
 ## Getting Help
-If you have questions, you can reach out to our mailing list: dev@aurora.apache.org
-([archive](http://mail-archives.apache.org/mod_mbox/aurora-dev)).
-We're also often available in IRC: #aurora on
-[irc.freenode.net](http://webchat.freenode.net/?channels=#aurora).
+If you have questions, you can reach out to one of our [mailing lists](https://aurora.apache.org/community/).
+We're also often available in IRC: #aurora on [irc.freenode.net](http://webchat.freenode.net/?channels=#aurora).
 
 You can also file bugs/issues in our [JIRA queue](http://issues.apache.org/jira/browse/AURORA).
 
