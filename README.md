@@ -15,6 +15,8 @@ https://aurora.apache.org/
 
 ## Features
 
+Aurora is build for users _and_ operators.
+
 * User-facing Features:
   - Management of long-running services
   - Cron scheduling
@@ -59,15 +61,10 @@ Are you using Aurora too?  Let us know, or submit a patch to join the list!
 - [TellApart](https://www.tellapart.com)
 - [Twitter](https://twitter.com)
 
-## Getting Started
-* [Try the tutorial](docs/tutorial.md)
-* [Running a Local Cluster with Vagrant](docs/vagrant.md)
-* [Installing Aurora](docs/installing.md)
-* [Developing Aurora](docs/developing-aurora-scheduler.md)
 
 ## Getting Help
-If you have questions, you can reach out to one of our [mailing lists](https://aurora.apache.org/community/).
-We're also often available in IRC: #aurora on [irc.freenode.net](http://webchat.freenode.net/?channels=#aurora).
+If you have questions that aren't answered in our [doucmentation](https://aurora.apache.org/documentation/latest/), you can reach out to one of our [mailing lists](https://aurora.apache.org/community/). We're also often available in IRC: #aurora on
+[irc.freenode.net](http://webchat.freenode.net/?channels=#aurora).
 
 You can also file bugs/issues in our [JIRA queue](http://issues.apache.org/jira/browse/AURORA).
 
