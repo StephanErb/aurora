@@ -19,7 +19,7 @@ We encourage you to ask questions on the [Aurora developer list](http://aurora.a
 
 ## Operators
  * [Installation](installing.md)
- * [Deployment and cluster configuraiton](deploying-aurora-scheduler.md)
+ * [Deployment and cluster configuration](deploying-aurora-scheduler.md)
  * [Security](security.md)
  * [Monitoring](monitoring.md)
  * [Hooks for Aurora Client API](hooks.md)
