@@ -34,5 +34,5 @@ We encourage you to ask questions on the [Aurora developer list](http://aurora.a
  * [Build System](build-system.md)
  
 ## Additional Resources
- * [Tools integrating with Aurora][tools.md)
+ * [Tools integrating with Aurora](tools.md)
  * [Presentation videos and slides](presentations.md)
