@@ -1,7 +1,7 @@
 ![Aurora Logo](docs/images/aurora_logo.png)
 
 Apache Aurora lets you use an [Apache Mesos](http://mesos.apache.org) cluster as a private cloud.
-It supports running long-running services, cron jobs, and ad-hoc jobs. 
+It supports running long-running services, cron jobs, and ad-hoc jobs.
 Aurora aims to make it extremely quick and easy to take a built application and run it on machines
 in a cluster, with an emphasis on reliability. It provides basic operations to manage services
 running in a cluster, such as rolling upgrades.
@@ -41,7 +41,7 @@ Aurora is build for users _and_ operators.
 
 ### When and when not to use Aurora
 Aurora can take over for most uses of software like monit and chef.  Aurora can manage applications,
-while these tools are still useful to manage Aurora and Mesos themselves. 
+while these tools are still useful to manage Aurora and Mesos themselves.
 
 However, if you have very specific scheduling requirements, or are building a system that looks like a
 scheduler itself, you may want to explore developing your own

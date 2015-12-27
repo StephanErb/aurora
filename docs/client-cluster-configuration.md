@@ -66,4 +66,5 @@ URL of your VIP in a loadbalancer or a roundrobin DNS name.
 #### auth_mechanism
 
 The identifier of an authentication mechanism that the client should use when communicating with the
-scheduler. Support for values other than `UNAUTHENTICATED` require a matching scheduler-side [security configuration](security.md).
+scheduler. Support for values other than `UNAUTHENTICATED` requires a matching scheduler-side
+[security configuration](security.md).
