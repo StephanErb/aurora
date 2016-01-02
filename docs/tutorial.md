@@ -121,19 +121,19 @@ identifies a Job. A job key consists of four parts, each separated by a
 "/". The four parts are  `<cluster>/<role>/<environment>/<jobname>`
 in that order:
 
-* Cluster refers to the name of a particular Aurora installation
+* Cluster refers to the name of a particular Aurora installation.
 * Role names are user accounts existing on the slave machines. If you
 don't know what accounts are available, contact your sysadmin.
 * Environment names are namespaces; you can count on `test`, `devel`,
 `staging` and `prod` existing.
-* A custom name for the job
+* Jobname is the custom name of job.
 
 When comparing two job keys, if any of the four parts is different from
 its counterpart in the other key, then the two job keys identify two separate
 jobs. If all four values are identical, the job keys identify the same job.
 
-The [client-side cluster configuration](client-cluster-configuration.md)
-`clusters.json` for the Aurora scheduler has the available cluster names.
+The `clusters.json` [client configuration](client-cluster-configuration.md)
+for the Aurora scheduler defines the available cluster names.
 For Vagrant, from the top-level of your Aurora repository clone, do:
 
     $ vagrant ssh
@@ -142,7 +142,7 @@ Followed by:
 
     vagrant@aurora:~$ cat /etc/aurora/clusters.json
 
-You'll see something like the following. The `name` value corresponds to your job key's cluster value.
+You'll see something like the following. The `name` value shown here, corresponds to a job key's cluster value.
 
 ```javascript
 [{
