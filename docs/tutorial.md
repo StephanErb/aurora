@@ -4,8 +4,6 @@ This tutorial shows how to use the Aurora scheduler to run (and "`printf-debug`"
 a hello world program on Mesos. This is the recommended document for new Aurora users
 to start getting up to speed on the system.
 
-To get help, email questions to the [Aurora user list](http://aurora.apache.org/community/).
-
 - [Prerequisite](#setup-install-aurora)
 - [The Script](#the-script)
 - [Aurora Configuration](#aurora-configuration)
