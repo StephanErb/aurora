@@ -38,10 +38,11 @@ in `RUNNING` state.
 
 ## RUNNING to terminal states
 
-There are various how an active `Task` can transition into a terminal state.
-A particular `Task` does never leave a terminal. It may however be that,
-depending on nature of the termination and the originating `Job` definition
-(e.g. `service`, `max_task_failures`), a replacement `Task` is scheduled.
+There are various ways how an active `Task` can transition into a terminal
+state. By definition, it can never leave this state. However, depending on
+nature of the termination and the originating `Job` definition
+(e.g. `service`, `max_task_failures`), a replacement `Task` might be
+scheduled.
 
 ### Natural Termination: FINISHED, FAILED
 
@@ -53,11 +54,11 @@ processes have succeeded with exit status `0` or finished without
 reaching failure limits) it moves into `FINISHED` state. If it finished
 after reaching a set of failure limits, it goes into `FAILED` state.
 
-If a terminated `TASK` is subject to rescheduling, it will be temporarily
-`THROTTLED` if it is considered to be flapping. A task is flapping if its
+A terminated `TASK` which is subject to rescheduling will be temporarily
+`THROTTLED`, if it is considered to be flapping. A task is flapping, if its
 previous invocation was terminated after less than 5 minutes (scheduler
-default). The time penalty a task has to remain in the `THROTTLED` state
-before it is eligible for rescheduling increases with each consecutive
+default). The time penalty a task has to remain in the `THROTTLED` state,
+before it is eligible for rescheduling, increases with each consecutive
 failure.
 
 ### Forceful Termination: KILLING, RESTARTING
@@ -74,11 +75,11 @@ an identical replacement for it.
 In any case, the responsible executor on the slave follows an escalation
 sequence when killing a running task:
 
-  1. If a `HTTPLifecycleConfig` is not present, skip to (4)
-  2. Send a POST to the `graceful_shutdown_endpoint` and wait 5 seconds
-  3. Send a POST to the `shutdown_endpoint` and wait 5 seconds
+  1. If a `HTTPLifecycleConfig` is not present, skip to (4).
+  2. Send a POST to the `graceful_shutdown_endpoint` and wait 5 seconds.
+  3. Send a POST to the `shutdown_endpoint` and wait 5 seconds.
   4. Send SIGTERM (`kill`) and wait at most `finalization_wait` seconds.
-  5. Send SIGKILL (`kill -9`)
+  5. Send SIGKILL (`kill -9`).
 
 If the executor notices that all `Process`es in a `Task` have aborted
 during this sequence, it will not proceed with subsequent steps.
@@ -133,9 +134,10 @@ be a mismatch of perceived and actual cluster state (e.g. a machine returns
 from a `netsplit` but the scheduler has already marked all its `Task`s as
 `LOST` and rescheduled them).
 
-Aurora repeatedly runs a state reconcilation process in order to correct
-such issues (e.g. by killing the errant `RUNNING` tasks). By default,
-it may take up to an hour until those issues are found and corrected.
+Aurora regularly runs a state reconciliation process in order to detect
+and correct such issues (e.g. by killing the errant `RUNNING` tasks).
+By default, the proper detection of all failure scenarios and inconsistencies
+may take up to an hour.
 
 To emphasize this point: there is no uniqueness guarantee for a single
 instance of a job in the presence of network partitions. If the `Task`
