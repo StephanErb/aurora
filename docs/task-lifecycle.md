@@ -26,7 +26,7 @@ finds a suitable match, it assigns the `Task` to a machine and puts the
 From the `ASSIGNED` state, the scheduler sends an RPC to the slave
 machine containing `Task` configuration, which the slave uses to spawn
 an executor responsible for the `Task`'s lifecycle. When the scheduler
-receives an acknowledgement that the machine has accepted the `Task`,
+receives an acknowledgment that the machine has accepted the `Task`,
 the `Task` goes into `STARTING` state.
 
 `STARTING` state initializes a `Task` sandbox. When the sandbox is fully
@@ -36,7 +36,7 @@ in `RUNNING` state.
 
 
 
-### RUNNING to terminal states
+## RUNNING to terminal states
 
 There are various how an active `Task` can transition into a terminal state.
 A particular `Task` does never leave a terminal. It may however be that,
@@ -119,18 +119,19 @@ preempted in favor of production tasks.
 
 ### Making Room for Maintenance: DRAINING
 
-Cluster operatos can set slave into maintenance mode. This will transition
+Cluster operators can set slave into maintenance mode. This will transition
 all `Task` running on this slave into `DRAINING` and eventually to `KILLED`.
-Drained `Task`s will be restarted on other slaves, preferredly ones for
-which no maintenance has been announced yet.
+Drained `Task`s will be restarted on other slaves for which no maintenance
+has been announced yet.
+
 
 
 ## State Reconciliation
 
 Due to the many inevitable realities of distributed systems, there might
 be a mismatch of perceived and actual cluster state (e.g. a machine returns
-from a `netsplit` but the scheduler has already marked all its `Task`s `LOST`
-and rescheduled them).
+from a `netsplit` but the scheduler has already marked all its `Task`s as
+`LOST` and rescheduled them).
 
 Aurora repeatedly runs a state reconcilation process in order to correct
 such issues (e.g. by killing the errant `RUNNING` tasks). By default,
