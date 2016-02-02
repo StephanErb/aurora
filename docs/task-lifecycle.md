@@ -11,6 +11,9 @@ When Aurora reads a configuration file and finds a `Job` definition, it:
 
 ![Life of a task](images/lifeofatask.png)
 
+Please note, a couple of task states described below are missing from
+this state diagram.
+
 
 ## PENDING to RUNNING states
 
@@ -38,7 +41,7 @@ in `RUNNING` state.
 
 ## RUNNING to terminal states
 
-There are various ways how an active `Task` can transition into a terminal
+There are various ways that an active `Task` can transition into a terminal
 state. By definition, it can never leave this state. However, depending on
 nature of the termination and the originating `Job` definition
 (e.g. `service`, `max_task_failures`), a replacement `Task` might be
@@ -48,7 +51,7 @@ scheduled.
 
 A `RUNNING` `Task` can terminate without direct user interaction. For
 example, it may be a finite computation that finishes, even something as
-simple as `echo hello world. `Or it could be an exceptional condition in
+simple as `echo hello world.`, or it could be an exceptional condition in
 a long-lived service. If the `Task` is successful (its underlying
 processes have succeeded with exit status `0` or finished without
 reaching failure limits) it moves into `FINISHED` state. If it finished
@@ -110,10 +113,8 @@ the `PREEMPTING` state  when both the following are true:
 - The other task is a `PENDING` production task that hasn't been
   scheduled due to a lack of resources.
 
-Since production tasks are much more important, Aurora kills off the
-non-production task to free up resources for the production task. The
-scheduler UI shows the non-production task was preempted in favor of the
-production task. At some point, tasks in `PREEMPTING` move to `KILLED`.
+The scheduler UI shows the non-production task was preempted in favor of
+the production task. At some point, tasks in `PREEMPTING` move to `KILLED`.
 
 Note that non-production tasks consuming many resources are likely to be
 preempted in favor of production tasks.

@@ -2,9 +2,9 @@ Aurora User Guide
 -----------------
 
 - [Overview](#user-content-overview)
+- [Job Lifecycle](#user-content-job-lifecycle)
 	- [Task Updates](#user-content-task-updates)
-	- [HTTP Health Checking and Graceful Shutdown](#user-content-http-health-checking-and-graceful-shutdown)
-		- [Tearing a task down](#user-content-tearing-a-task-down)
+	- [HTTP Health Checking](#user-content-http-health-checking)
 - [Service Discovery](#user-content-service-discovery)
 - [Configuration](#user-content-configuration)
 - [Creating Jobs](#user-content-creating-jobs)
@@ -94,6 +94,13 @@ checkpointing mechanisms directly into your application or into your
 `Job` description.
 
 
+Job Lifecycle
+-------------
+
+`Job`s and their `Task`s have various states that are described in the [Task Lifecycle](task-lifecycle.md).
+However, in day to day use, you'll be primarily concerned with launching new jobs and updating existing ones.
+
+
 ### Task Updates
 
 `Job` configurations can be updated at any point in their lifecycle.
@@ -126,14 +133,14 @@ with old instance configs and batch updates proceed backwards
 from the point where the update failed. E.g.; (0,1,2) (3,4,5) (6,7,
 8-FAIL) results in a rollback in order (8,7,6) (5,4,3) (2,1,0).
 
-### HTTP Health Checking and Graceful Shutdown
+### HTTP Health Checking
 
 The Executor implements a protocol for rudimentary control of a task via HTTP.  Tasks subscribe for
 this protocol by declaring a port named `health`.  Take for example this configuration snippet:
 
     nginx = Process(
       name = 'nginx',
-      cmdline = './run_nginx.sh -port {{thermos.ports[http]}}')
+      cmdline = './run_nginx.sh -port {{thermos.ports[health]}}')
 
 When this Process is included in a job, the job will be allocated a port, and the command line
 will be replaced with something like:
@@ -148,8 +155,6 @@ requests:
 | HTTP request            | Description                             |
 | ------------            | -----------                             |
 | `GET /health`           | Inquires whether the task is healthy.   |
-| `POST /quitquitquit`    | Task should initiate graceful shutdown. |
-| `POST /abortabortabort` | Final warning task is being killed.     |
 
 Please see the
 [configuration reference](configuration-reference.md#user-content-healthcheckconfig-objects) for
