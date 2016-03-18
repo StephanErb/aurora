@@ -1,10 +1,10 @@
 # Scheduler Configuration
 
-The Aurora scheduler can take a variety of configuration options through command-line arguments. A list of the available options
-can be seen by running `aurora-scheduler -help`.
+The Aurora scheduler can take a variety of configuration options through command-line arguments.
+A list of the available options can be seen by running `aurora-scheduler -help`.
 
-Please refer to [Deploying the Aurora Scheduler](deploying-aurora-scheduler.md) for details on how to properly set the most
-important options.
+Please refer to [Deploying the Aurora Scheduler](deploying-aurora-scheduler.md) for details on how
+to properly set the most important options.
 
 ```
 $ aurora-scheduler -help
