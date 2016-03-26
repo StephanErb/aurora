@@ -1,3 +1,6 @@
+Committer's Guide
+=================
+
 Setting up your email account
 -----------------------------
 Once your Apache ID has been set up you can configure your account and add ssh keys and setup an

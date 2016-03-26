@@ -1,4 +1,4 @@
-#Aurora Scheduler Storage
+# Aurora Scheduler Storage
 
 - [Overview](#overview)
 - [Reads, writes, modifications](#reads-writes-modifications)
@@ -86,3 +86,100 @@ Any time a scheduler restarts, it restores its volatile state from the most rece
 in the replicated log by restoring the snapshot and replaying individual log entries on top to fully
 recover the state up to the last write.
 
+
+
+
+### Replicated Log Configuration
+All Aurora state is persisted to a replicated log. This includes all jobs Aurora is running
+including where in the cluster they are being run and the configuration for running them, as
+well as other information such as metadata needed to reconnect to the Mesos master, resource
+quotas, and any other locks in place.
+
+Aurora schedulers use ZooKeeper to discover log replicas and elect a leader. Only one scheduler is
+leader at a given time - the other schedulers follow log writes and prepare to take over as leader
+but do not communicate with the Mesos master. Either 3 or 5 schedulers are recommended in a
+production deployment depending on failure tolerance and they must have persistent storage.
+
+In a cluster with `N` schedulers, the flag `-native_log_quorum_size` should be set to
+`floor(N/2) + 1`. So in a cluster with 1 scheduler it should be set to `1`, in a cluster with 3 it
+should be set to `2`, and in a cluster of 5 it should be set to `3`.
+
+  Number of schedulers (N) | ```-native_log_quorum_size``` setting (```floor(N/2) + 1```)
+  ------------------------ | -------------------------------------------------------------
+  1                        | 1
+  3                        | 2
+  5                        | 3
+  7                        | 4
+
+*Incorrectly setting this flag will cause data corruption to occur!*
+
+See [this document](storage-config.md#scheduler-storage-configuration-flags) for more replicated
+log and storage configuration options.
+
+## Initializing the Replicated Log
+Before you start Aurora you will also need to initialize the log on a majority of the schedulers.
+
+    mesos-log initialize --path="/path/to/native/log"
+
+The `--path` flag should match the `--native_log_file_path` flag to the scheduler.
+Failing to do this will result the following message when you try to start the scheduler.
+
+    Replica in EMPTY status received a broadcasted recover request
+
+### Storage Performance Considerations
+
+See [this document](scheduler-storage.md) for scheduler storage performance considerations.
+
+
+
+
+
+
+
+
+This document summarizes Aurora storage configuration and maintenance details and is
+intended for use by anyone deploying and/or maintaining Aurora.
+
+For a high level overview of the Aurora storage architecture refer to [this document](storage.md).
+
+## Scheduler storage configuration flags
+
+Below is a summary of scheduler storage configuration flags that either don't have default values
+or require attention before deploying in a production environment.
+
+### Mesos replicated log configuration flags
+
+#### -native_log_quorum_size
+Defines the Mesos replicated log quorum size. See
+[the replicated log configuration document](deploying-aurora-scheduler.md#replicated-log-configuration)
+on how to choose the right value.
+
+#### -native_log_file_path
+Location of the Mesos replicated log files. Consider allocating a dedicated disk (preferably SSD)
+for Mesos replicated log files to ensure optimal storage performance.
+
+#### -native_log_zk_group_path
+ZooKeeper path used for Mesos replicated log quorum discovery.
+
+See [code](../src/main/java/org/apache/aurora/scheduler/log/mesos/MesosLogStreamModule.java) for
+other available Mesos replicated log configuration options and default values.
+
+
+
+
+
+## Changing Scheduler Quorum Size
+Special care needs to be taken when changing the size of the Aurora scheduler quorum.
+Since Aurora uses a Mesos replicated log, similar steps need to be followed as when
+[changing the mesos quorum size](http://mesos.apache.org/documentation/latest/operational-guide).
+
+### Preparation
+Increase [-native_log_quorum_size](storage-config.md#-native_log_quorum_size) on each
+existing scheduler and restart them. When updating from 3 to 5 schedulers, the quorum size
+would grow from 2 to 3.
+
+### Adding New Schedulers
+Start the new schedulers with `-native_log_quorum_size` set to the new value. Failing to
+first increase the quorum size on running schedulers can in some cases result in corruption
+or truncating of the replicated log used by Aurora. In that case, see the documentation on
+[recovering from backup](storage-config.md#recovering-from-a-scheduler-backup).

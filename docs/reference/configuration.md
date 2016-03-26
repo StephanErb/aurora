@@ -1,33 +1,16 @@
-Aurora + Thermos Configuration Reference
-========================================
+Aurora Configuration Reference
+==============================
 
-- [Aurora + Thermos Configuration Reference](#aurora--thermos-configuration-reference)
 - [Introduction](#introduction)
 - [Process Schema](#process-schema)
     - [Process Objects](#process-objects)
-      - [name](#name)
-      - [cmdline](#cmdline)
-      - [max_failures](#max_failures)
-      - [daemon](#daemon)
-      - [ephemeral](#ephemeral)
-      - [min_duration](#min_duration)
-      - [final](#final)
-      - [logger](#logger)
 - [Task Schema](#task-schema)
     - [Task Object](#task-object)
-      - [name](#name-1)
-      - [processes](#processes)
-        - [constraints](#constraints)
-      - [resources](#resources)
-      - [max_failures](#max_failures-1)
-      - [max_concurrency](#max_concurrency)
-      - [finalization_wait](#finalization_wait)
     - [Constraint Object](#constraint-object)
     - [Resource Object](#resource-object)
 - [Job Schema](#job-schema)
     - [Job Objects](#job-objects)
     - [Services](#services)
-    - [Revocable Jobs](#revocable-jobs)
     - [UpdateConfig Objects](#updateconfig-objects)
     - [HealthCheckConfig Objects](#healthcheckconfig-objects)
     - [Announcer Objects](#announcer-objects)
@@ -391,20 +374,6 @@ Jobs without the service bit set only restart up to
 `max_task_failures` times and only if they terminated unsuccessfully
 either due to human error or machine failure.
 
-### Revocable Jobs
-
-**WARNING**: This feature is currently in alpha status. Do not use it in production clusters!
-
-Mesos [supports a concept of revocable tasks](http://mesos.apache.org/documentation/latest/oversubscription/)
-by oversubscribing machine resources by the amount deemed safe to not affect the existing
-non-revocable tasks. Aurora now supports revocable jobs via a `tier` setting set to `revocable`
-value.
-
-More implementation details in this [ticket](https://issues.apache.org/jira/browse/AURORA-1343).
-
-Scheduler must be [configured](deploying-aurora-scheduler.md#configuring-resource-oversubscription)
-to receive revocable offers from Mesos and accept revocable jobs. If not configured properly
-revocable tasks will never get assigned to hosts and will stay in PENDING.
 
 ### UpdateConfig Objects
 

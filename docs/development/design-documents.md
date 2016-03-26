@@ -1,4 +1,5 @@
-# Design Documents
+Design Documents
+================
 
 Since its inception as an Apache project, larger feature additions to the
 Aurora code base are discussed in form of design documents. Design documents

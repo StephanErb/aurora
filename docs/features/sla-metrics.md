@@ -1,5 +1,5 @@
 Aurora SLA Measurement
---------------
+======================
 
 - [Overview](#overview)
 - [Metric Details](#metric-details)
@@ -16,7 +16,7 @@ Agreements) metrics that defining a contractual relationship between the Aurora/
 and hosted services.
 
 The Aurora SLA feature is by default only enabled for service (non-cron)
-production jobs (`"production = True"` in your `.aurora` config). It can be enabled for
+production jobs (`"production=True"` in your `.aurora` config). It can be enabled for
 non-production services via the scheduler command line flag `-sla_non_prod_metrics`.
 
 Counters that track SLA measurements are computed periodically within the scheduler.
@@ -24,6 +24,7 @@ The individual instance metrics are refreshed every minute (configurable via
 `sla_stat_refresh_interval`). The instance counters are subsequently aggregated by
 relevant grouping types before exporting to scheduler `/vars` endpoint (when using `vagrant`
 that would be `http://192.168.33.7:8081/vars`)
+
 
 ## Metric Details
 

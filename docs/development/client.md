@@ -1,20 +1,12 @@
-Getting Started
-===============
+Developing the Aurora Client
+============================
 
 The client is written in Python, and uses the
 [Pants](http://pantsbuild.github.io/python-readme.html) build tool.
 
-Client Configuration
-====================
 
-The client uses a configuration file that specifies available clusters. More information about the
-contents of this file can be found in the
-[Client Cluster Configuration](client-cluster-configuration.md) documentation. Information about
-how the client locates this file can be found in the
-[Client Commands](client-commands.md#cluster-configuration) documentation.
-
-Building and Testing the Client
-===============================
+Building and Testing
+--------------------
 
 Building and testing the client code are both done using Pants. The relevant targets to know about
 are:
@@ -24,8 +16,9 @@ are:
 
 If you want to build a source distribution of the client, you need to run `./build-support/release/make-python-sdists`.
 
-Running/Debugging the Client
-============================
+
+Running/Debugging
+------------------
 
 For manually testing client changes against a cluster, we use [Vagrant](https://www.vagrantup.com/).
 To start a virtual cluster, you need to install Vagrant, and then run `vagrant up` for the root of
@@ -38,8 +31,9 @@ If you have a change you would like to test in your local cluster, you'll rebuil
 
 Once this completes, the `aurora` command will reflect your changes.
 
-Running/Debugging the Client in PyCharm
-=======================================
+
+Running/Debugging in PyCharm
+-----------------------------
 
 It's possible to use PyCharm to run and debug both the client and client tests in an IDE. In order
 to do this, first run:
@@ -61,7 +55,6 @@ completes it will emit instructions for configuring PyCharm:
       - click 'OK'
 
 ### Running/Debugging Tests
-
 After following these instructions, you should now be able to run/debug tests directly from the IDE
 by right-clicking on a test (or test class) and choosing to run or debug:
 
@@ -72,7 +65,6 @@ If you've set a breakpoint, you can see the run will now stop and let you debug:
 [![Debugging Client Test](images/debugging-client-test.png)](images/debugging-client-test.png)
 
 ### Running/Debugging the Client
-
 Actually running and debugging the client is unfortunately a bit more complex. You'll need to create
 a Run configuration:
 
@@ -87,7 +79,3 @@ a Run configuration:
   running in the vagrant image, it would be set to `/your/path/to/aurora/examples/vagrant` (this
   is the directory where our example clusters.json is found).
 * You should now be able to run and debug this configuration!
-
-Making thrift schema changes
-============================
-See [this document](thrift-deprecation.md) for any thrift related changes.

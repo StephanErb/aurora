@@ -1,50 +1,3 @@
-# Storage Configuration And Maintenance
-
-- [Overview](#overview)
-- [Scheduler storage configuration flags](#scheduler-storage-configuration-flags)
-  - [Mesos replicated log configuration flags](#mesos-replicated-log-configuration-flags)
-    - [-native_log_quorum_size](#-native_log_quorum_size)
-    - [-native_log_file_path](#-native_log_file_path)
-    - [-native_log_zk_group_path](#-native_log_zk_group_path)
-  - [Backup configuration flags](#backup-configuration-flags)
-    - [-backup_interval](#-backup_interval)
-    - [-backup_dir](#-backup_dir)
-    - [-max_saved_backups](#-max_saved_backups)
-- [Recovering from a scheduler backup](#recovering-from-a-scheduler-backup)
-  - [Summary](#summary)
-  - [Preparation](#preparation)
-  - [Cleanup and re-initialize Mesos replicated log](#cleanup-and-re-initialize-mesos-replicated-log)
-  - [Restore from backup](#restore-from-backup)
-  - [Cleanup](#cleanup)
-
-## Overview
-
-This document summarizes Aurora storage configuration and maintenance details and is
-intended for use by anyone deploying and/or maintaining Aurora.
-
-For a high level overview of the Aurora storage architecture refer to [this document](storage.md).
-
-## Scheduler storage configuration flags
-
-Below is a summary of scheduler storage configuration flags that either don't have default values
-or require attention before deploying in a production environment.
-
-### Mesos replicated log configuration flags
-
-#### -native_log_quorum_size
-Defines the Mesos replicated log quorum size. See
-[the replicated log configuration document](deploying-aurora-scheduler.md#replicated-log-configuration)
-on how to choose the right value.
-
-#### -native_log_file_path
-Location of the Mesos replicated log files. Consider allocating a dedicated disk (preferably SSD)
-for Mesos replicated log files to ensure optimal storage performance.
-
-#### -native_log_zk_group_path
-ZooKeeper path used for Mesos replicated log quorum discovery.
-
-See [code](../src/main/java/org/apache/aurora/scheduler/log/mesos/MesosLogStreamModule.java) for
-other available Mesos replicated log configuration options and default values.
 
 ### Backup configuration flags
 
@@ -58,6 +11,8 @@ Directory to write backups to.
 
 #### -max_saved_backups
 Maximum number of backups to retain before deleting the oldest backup(s).
+
+
 
 ## Recovering from a scheduler backup
 
@@ -150,4 +105,3 @@ the provided backup snapshot and initiate a mandatory failover
 
 ### Cleanup
 Undo any modification done during [Preparation](#preparation) sequence.
-

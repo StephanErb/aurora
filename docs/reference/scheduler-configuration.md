@@ -6,6 +6,42 @@ A list of the available options can be seen by running `aurora-scheduler -help`.
 Please refer to [Deploying the Aurora Scheduler](deploying-aurora-scheduler.md) for details on how
 to properly set the most important options.
 
+### A Note on Configuration
+Like Mesos, Aurora uses command-line flags for runtime configuration. As such the Aurora
+"configuration file" is typically a `scheduler.sh` shell script of the form.
+
+    #!/bin/bash
+    AURORA_HOME=/usr/local/aurora-scheduler
+
+    # Flags controlling the JVM.
+    JAVA_OPTS=(
+      -Xmx2g
+      -Xms2g
+      # GC tuning, etc.
+    )
+
+    # Flags controlling the scheduler.
+    AURORA_FLAGS=(
+      # Port for client RPCs and the web UI
+      -http_port=8081
+      # Log configuration, etc.
+    )
+
+    # Environment variables controlling libmesos
+    export JAVA_HOME=...
+    export GLOG_v=1
+    # Port used to communicate with the Mesos master and for the replicated log
+    export LIBPROCESS_PORT=8083
+
+    JAVA_OPTS="${JAVA_OPTS[*]}" exec "$AURORA_HOME/bin/aurora-scheduler" "${AURORA_FLAGS[@]}"
+
+That way Aurora's current flags are visible in `ps` and in the `/vars` admin endpoint.
+
+Examples are available under `examples/scheduler/`. For a list of available Aurora flags and their
+documentation, see [this document](scheduler-configuration.md).
+
+
+
 ```
 $ aurora-scheduler -help
 -------------------------------------------------------------------------

@@ -36,19 +36,17 @@ consider whether or not to error-trap them. You can error trap at the
 highest level very generally and always pass the `pre_` hook by
 returning `True`. For example:
 
-```python
-def pre_create(...):
-  do_something()  # if do_something fails with an exception, the create_job is not attempted!
-  return True
+    def pre_create(...):
+      do_something()  # if do_something fails with an exception, the create_job is not attempted!
+      return True
 
-# However...
-def pre_create(...):
-  try:
-    do_something()  # may cause exception
-  except Exception:  # generic error trap will catch it
-    pass  # and ignore the exception
-  return True  # create_job will run in any case!
-```
+    # However...
+    def pre_create(...):
+      try:
+        do_something()  # may cause exception
+      except Exception:  # generic error trap will catch it
+        pass  # and ignore the exception
+      return True  # create_job will run in any case!
 
 `post_<method_name>`: A `post_` hook executes after its associated method successfully finishes running. If it fails, the already executed method is unaffected. A `post_` hook's error is trapped, and any later operations are unaffected.
 
@@ -118,14 +116,12 @@ To summarize, to use hooks for a particular job, you must both activate hooks fo
 
 Recall that `.aurora` config files are written in Pystachio. So the following turns on hooks for production jobs at cluster1 and cluster2, but leaves them off for similar jobs with a defined user role. Of course, you also need to list the objects that define the hooks in your config file's `hooks` variable.
 
-```python
-jobs = [
-        Job(enable_hooks = True, cluster = c, env = 'prod') for c in ('cluster1', 'cluster2')
-       ]
-jobs.extend(
-   Job(cluster = c, env = 'prod', role = getpass.getuser()) for c in ('cluster1', 'cluster2'))
-   # Hooks disabled for these jobs
-```
+    jobs = [
+            Job(enable_hooks = True, cluster = c, env = 'prod') for c in ('cluster1', 'cluster2')
+           ]
+    jobs.extend(
+       Job(cluster = c, env = 'prod', role = getpass.getuser()) for c in ('cluster1', 'cluster2'))
+       # Hooks disabled for these jobs
 
 ## Command Line
 
@@ -145,17 +141,15 @@ Note that you can define other methods in the class that its hook methods can ca
 
 The following example defines a class containing a `pre_kill_job` hook definition that calls another method defined in the class.
 
-```python
-# Defines a method pre_kill_job
-class KillConfirmer(object):
-  def confirm(self, msg):
-    return raw_input(msg).lower() == 'yes'
+    # Defines a method pre_kill_job
+    class KillConfirmer(object):
+      def confirm(self, msg):
+        return raw_input(msg).lower() == 'yes'
 
-  def pre_kill_job(self, job_key, shards=None):
-    shards = ('shards %s' % shards) if shards is not None else 'all shards'
-    return self.confirm('Are you sure you want to kill %s (%s)? (yes/no): '
-                        % (job_key, shards))
-```
+      def pre_kill_job(self, job_key, shards=None):
+        shards = ('shards %s' % shards) if shards is not None else 'all shards'
+        return self.confirm('Are you sure you want to kill %s (%s)? (yes/no): '
+                            % (job_key, shards))
 
 ### pre_ Methods
 
@@ -191,9 +185,7 @@ If this method returns False, the API command call aborts.
 
 There are seven Aurora API Methods which any of the three hook types can attach to. Thus, there are 21 possible hook/method combinations for a single `.aurora` config file. Say that you define `pre_` and `post_` hooks for the `restart` method. That leaves 19 undefined hook/method combinations; `err_restart` and the 3 `pre_`, `post_`, and `err_` hooks for each of the other 6 hookable methods. You can define what happens when any of these otherwise undefined 19 hooks execute via a generic hook, whose signature is:
 
-```python
-generic_hook(self, hook_config, event, method_name, result_or_err, args*, kw**)
-```
+    generic_hook(self, hook_config, event, method_name, result_or_err, args*, kw**)
 
 where:
 
@@ -211,29 +203,23 @@ where:
 
 Example:
 
-```python
-# Overrides the standard do-nothing generic_hook by adding a log writing operation.
-from twitter.common import log
-  class Logger(object):
-    '''Adds to the log every time a hookable API method is called'''
-    def generic_hook(self, hook_config, event, method_name, result_or_err, *args, **kw)
-      log.info('%s: %s_%s of %s'
-               % (self.__class__.__name__, event, method_name, hook_config.job_key))
-```
+    # Overrides the standard do-nothing generic_hook by adding a log writing operation.
+    from twitter.common import log
+      class Logger(object):
+        '''Adds to the log every time a hookable API method is called'''
+        def generic_hook(self, hook_config, event, method_name, result_or_err, *args, **kw)
+          log.info('%s: %s_%s of %s'
+                   % (self.__class__.__name__, event, method_name, hook_config.job_key))
 
 ## Hooks Process Checklist
 
 1. In your `.aurora` config file, add a `hooks` variable. Note that you may want to define a `.aurora` file only for hook definitions and then include this file in multiple other config files that you want to use the same hooks.
 
-```python
-hooks = []
-```
+    hooks = []
 
 2. In the `hooks` variable, list all objects that define hooks used by `Job`s defined in this config:
 
-```python
-hooks = [Object_hook_definer1, Object_hook_definer2]
-```
+    hooks = [Object_hook_definer1, Object_hook_definer2]
 
 3. For each job that uses hooks in this config file, add `enable_hooks = True` to the `Job` definition. Note that this is necessary even if you only want to use the generic hook.
 

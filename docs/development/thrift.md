@@ -1,6 +1,6 @@
-# Thrift API Changes
+Thrift
+======
 
-## Overview
 Aurora uses [Apache Thrift](https://thrift.apache.org/) for representing structured data in
 client/server RPC protocol as well as for internal data storage. While Thrift is capable of
 correctly handling additions and renames of the existing members, field removals must be done
@@ -12,7 +12,8 @@ It is highly recommended to go through the
 [Thrift: The Missing Guide](http://diwakergupta.github.io/thrift-missing-guide/) first to refresh on
 basic Thrift schema concepts.
 
-## Checklist
+Checklist
+---------
 Every existing Thrift schema modification is unique in its requirements and must be analyzed
 carefully to identify its scope and expected consequences. The following checklist may help in that
 analysis:
@@ -20,7 +21,8 @@ analysis:
 * Is this a pure field/struct rename without any type/structure change? If yes, go ahead and rename
 * Anything else, read further to make sure your change is properly planned
 
-## Deprecation cycle
+Deprecation cycle
+-----------------
 Any time a breaking change (e.g.: field replacement or removal) is required, the following cycle
 must be followed:
 
@@ -46,7 +48,8 @@ Finalize the change by removing the deprecated fields from the Thrift schema.
 * Remove thrift backfilling in scheduler
 * Remove the deprecated Thrift field
 
-## Testing
+Testing
+-------
 It's always advisable to test your changes in the local vagrant environment to build more
 confidence that you change is backwards compatible. It's easy to simulate different
 client/scheduler versions by playing with `aurorabuild` command. See [this document](vagrant.md)

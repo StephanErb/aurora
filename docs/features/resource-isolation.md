@@ -1,18 +1,5 @@
-Resources and Sizing
-=============================
-
-- [Introduction](#introduction)
-- [CPU Isolation](#cpu-isolation)
-- [CPU Sizing](#cpu-sizing)
-- [Memory Isolation](#memory-isolation)
-- [Memory Sizing](#memory-sizing)
-- [Disk Space](#disk-space)
-- [Disk Space Sizing](#disk-space-sizing)
-- [Other Resources](#other-resources)
-- [Resource Quota](#resource-quota)
-- [Task Preemption](#task-preemption)
-
-## Introduction
+Resources Isolation and Sizing
+==============================
 
 Aurora is a multi-tenant system; a single software instance runs on a
 server, serving multiple clients/tenants. To share resources among
@@ -143,22 +130,3 @@ Other resources, such as network bandwidth, do not have any performance
 guarantees. For some resources, such as memory bandwidth, there are no
 practical sharing methods so some application combinations collocated on
 the same host may cause contention.
-
-## Resource Quota
-
-Aurora requires resource quotas for
-[production non-dedicated jobs](configuration-reference.md#job-objects). Quota is enforced at
-the job role level and when set, defines a non-preemptible pool of compute resources within
-that role.
-
-To grant quota to a particular role in production use `aurora_admin set_quota` command.
-
-NOTE: all job types (service, adhoc or cron) require role resource quota unless a job has
-[dedicated constraint set](deploying-aurora-scheduler.md#dedicated-attribute).
-
-## Task preemption
-
-Under a particular resource shortage pressure, tasks from
-[production](configuration-reference.md#job-objects) jobs may preempt tasks from any non-production
-job. A production task may only be preempted by tasks from production jobs in the same role with
-higher [priority](configuration-reference.md#job-objects).
