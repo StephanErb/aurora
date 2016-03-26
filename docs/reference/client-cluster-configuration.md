@@ -20,7 +20,7 @@ A configuration for a leader-elected scheduler would contain something like:
       "zk": "192.168.33.7",
       "scheduler_zk_path": "/aurora/scheduler"
     }]
-```
+
 
 The following properties may be set:
 
