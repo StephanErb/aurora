@@ -17,7 +17,7 @@ and hosted services.
 
 The Aurora SLA feature is by default only enabled for service (non-cron)
 production jobs (`"production=True"` in your `.aurora` config). It can be enabled for
-non-production services via the scheduler command line flag `-sla_non_prod_metrics`.
+non-production services by an operator via the scheduler command line flag `-sla_non_prod_metrics`.
 
 Counters that track SLA measurements are computed periodically within the scheduler.
 The individual instance metrics are refreshed every minute (configurable via

@@ -1,3 +1,9 @@
+
+TODO
+
+(copy & paste dump below)
+
+
 ### Considerations for running jobs in docker containers
 In order for Aurora to launch jobs using docker containers, a few extra configuration options
 must be set.  The [docker containerizer](http://mesos.apache.org/documentation/latest/docker-containerizer/)

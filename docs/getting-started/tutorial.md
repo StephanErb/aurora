@@ -251,10 +251,8 @@ The job page now shows the `hello_world` tasks as completed.
 
 Now that you've finished this Tutorial, you should read or do the following:
 
-- [The Aurora Configuration Tutorial](configuration-tutorial.md), which provides more examples
+- [The Aurora Configuration Tutorial](reference/configuration-tutorial.md), which provides more examples
   and best practices for writing Aurora configurations. You should also look at
-  the [Aurora + Thermos Configuration Reference](configuration-reference.md).
-- The [Aurora User Guide](user-guide.md) provides an overview of how Aurora, Mesos, and
-  Thermos work "under the hood".
+  the [Aurora Configuration Reference](reference/configuration.md).
 - Explore the Aurora Client - use `aurora -h`, and read the
-  [Aurora Client Commands](client-commands.md) document.
+  [Aurora Client Commands](reference/client-commands.md) document.

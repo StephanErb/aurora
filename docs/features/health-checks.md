@@ -1,3 +1,10 @@
+
+
+TODO
+
+(copy & paste dump below)
+
+
 ### HTTP Health Checking
 
 The Executor implements a protocol for rudimentary control of a task via HTTP.  Tasks subscribe for

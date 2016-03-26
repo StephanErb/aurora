@@ -9,18 +9,17 @@ configuration parses, then outputs it in human-readable form.
 
 You should read this after going through the general [Aurora Tutorial](tutorial.md).
 
-- [Aurora Configuration Tutorial](#user-content-aurora-configuration-tutorial)
-	- [The Basics](#user-content-the-basics)
-		- [Use Bottom-To-Top Object Ordering](#user-content-use-bottom-to-top-object-ordering)
-	- [An Example Configuration File](#user-content-an-example-configuration-file)
-	- [Defining Process Objects](#user-content-defining-process-objects)
-	- [Getting Your Code Into The Sandbox](#user-content-getting-your-code-into-the-sandbox)
-	- [Defining Task Objects](#user-content-defining-task-objects)
-		- [SequentialTask: Running Processes in Parallel or Sequentially](#user-content-sequentialtask-running-processes-in-parallel-or-sequentially)
-		- [SimpleTask](#user-content-simpletask)
-		- [Combining tasks](#user-content-combining-tasks)
-	- [Defining Job Objects](#user-content-defining-job-objects)
-	- [The jobs List](#user-content-the-jobs-list)
+- [The Basics](#user-content-the-basics)
+	- [Use Bottom-To-Top Object Ordering](#user-content-use-bottom-to-top-object-ordering)
+- [An Example Configuration File](#user-content-an-example-configuration-file)
+- [Defining Process Objects](#user-content-defining-process-objects)
+- [Getting Your Code Into The Sandbox](#user-content-getting-your-code-into-the-sandbox)
+- [Defining Task Objects](#user-content-defining-task-objects)
+	- [SequentialTask: Running Processes in Parallel or Sequentially](#user-content-sequentialtask-running-processes-in-parallel-or-sequentially)
+	- [SimpleTask](#user-content-simpletask)
+	- [Combining tasks](#user-content-combining-tasks)
+- [Defining Job Objects](#user-content-defining-job-objects)
+- [The jobs List](#user-content-the-jobs-list)
 
 
 The Basics
@@ -57,7 +56,7 @@ Reference*](configuration-reference.md), without `import` statements - the
 Aurora config loader injects them automatically. Other than that, an `.aurora`
 file works like any other Python script.
 
-[*Aurora+Thermos Configuration Reference*](configuration-reference.md)
+[*Aurora Configuration Reference*](reference/configuration.md)
 has a full reference of all Aurora/Thermos defined Pystachio objects.
 
 ### Use Bottom-To-Top Object Ordering

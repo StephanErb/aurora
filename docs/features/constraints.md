@@ -1,3 +1,8 @@
+
+TODO
+
+(copy & paste dump below)
+
 ### Running stateful services
 Aurora is best suited to run stateless applications, but it also accommodates for stateful services
 like databases, or services that otherwise need to always run on the same machines.
