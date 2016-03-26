@@ -36,7 +36,7 @@ restart.
 This solves a [disaster recovery problem](storage-config.md#recovering-from-a-scheduler-backup)
 in case of a complete loss or corruption of Mesos log files.
 
-![Storage hierarchy](images/storage_hierarchy.png)
+![Storage hierarchy](../images/storage_hierarchy.png)
 
 ## Reads, writes, modifications
 

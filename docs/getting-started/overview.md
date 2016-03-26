@@ -10,7 +10,7 @@ Components
 It is important to have an understanding of the components that make up
 a functioning Aurora cluster.
 
-![Aurora Components](images/components.png)
+![Aurora Components](../images/components.png)
 
 * **Aurora scheduler**
   The scheduler will be your primary interface to the work you run in your cluster.  You will
@@ -88,7 +88,7 @@ This can be summarized as:
 * Thermos manages processes.
 * All that is defined in `.aurora` configuration files
 
-![Aurora hierarchy](images/aurora_hierarchy.png)
+![Aurora hierarchy](../images/aurora_hierarchy.png)
 
 Each `Task` has a *sandbox* created when the `Task` starts and garbage
 collected when it finishes. All of a `Task'`s processes run in its

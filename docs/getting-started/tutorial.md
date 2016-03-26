@@ -179,16 +179,16 @@ scheduler web interface at `http://$scheduler_hostname:$scheduler_port/scheduler
 Or when using `vagrant`, `http://192.168.33.7:8081/scheduler`
 First we see what Jobs are scheduled:
 
-![Scheduled Jobs](images/ScheduledJobs.png)
+![Scheduled Jobs](../images/ScheduledJobs.png)
 
 Click on your user name, which in this case was `www-data`, and we see the Jobs associated
 with that role:
 
-![Role Jobs](images/RoleJobs.png)
+![Role Jobs](../images/RoleJobs.png)
 
 If you click on your `hello_world` Job, you'll see:
 
-![hello_world Job](images/HelloWorldJob.png)
+![hello_world Job](../images/HelloWorldJob.png)
 
 Oops, looks like our first job didn't quite work! The task is temporarily throttled for
 having failed on every attempt of the Aurora scheduler to run it. We have to figure out
@@ -196,17 +196,17 @@ what is going wrong.
 
 On the Completed tasks tab, we see all past attempts of the Aurora scheduler to run our job.
 
-![Completed tasks tab](images/CompletedTasks.png)
+![Completed tasks tab](../images/CompletedTasks.png)
 
 We can navigate to the Task page of a failed run by clicking on the host link.
 
-![Task page](images/TaskBreakdown.png)
+![Task page](../images/TaskBreakdown.png)
 
 Once there, we see that the `hello_world` process failed. The Task page
 captures the standard error and standard output streams and makes them available.
 Clicking through to `stderr` on the failed `hello_world` process, we see what happened.
 
-![stderr page](images/stderr.png)
+![stderr page](../images/stderr.png)
 
 It looks like we made a typo in our Python script. We wanted `xrange`,
 not `xrang`. Edit the `hello_world.py` script to use the correct function
@@ -221,17 +221,17 @@ In order to try again, we can now instruct the scheduler to update our job:
 
 This time, the task comes up.
 
-![Running Job](images/RunningJob.png)
+![Running Job](../images/RunningJob.png)
 
 By again clicking on the host, we inspect the Task page, and see that the
 `hello_world` process is running.
 
-![Running Task page](images/runningtask.png)
+![Running Task page](../images/runningtask.png)
 
 We then inspect the output by clicking on `stdout` and see our process'
 output:
 
-![stdout page](images/stdout.png)
+![stdout page](../images/stdout.png)
 
 ## Cleanup
 
@@ -245,7 +245,7 @@ Now that we're done, we kill the job using the Aurora client:
 
 The job page now shows the `hello_world` tasks as completed.
 
-![Killed Task page](images/killedtask.png)
+![Killed Task page](../images/killedtask.png)
 
 ## Next Steps
 

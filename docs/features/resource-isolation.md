@@ -33,7 +33,7 @@ CPU time every 100 ms. This CPU quota can be used in different ways,
 depending on the application and available resources. Consider the
 scenarios shown in this diagram.
 
-![CPU Availability](images/CPUavailability.png)
+![CPU Availability](../images/CPUavailability.png)
 
 * *Scenario A*: the application can use up to 4 cores continuously for
 every 100 ms interval. It is never throttled and starts processing

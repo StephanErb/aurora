@@ -58,11 +58,11 @@ completes it will emit instructions for configuring PyCharm:
 After following these instructions, you should now be able to run/debug tests directly from the IDE
 by right-clicking on a test (or test class) and choosing to run or debug:
 
-[![Debug Client Test](images/debug-client-test.png)](images/debug-client-test.png)
+[![Debug Client Test](../images/debug-client-test.png)](../images/debug-client-test.png)
 
 If you've set a breakpoint, you can see the run will now stop and let you debug:
 
-[![Debugging Client Test](images/debugging-client-test.png)](images/debugging-client-test.png)
+[![Debugging Client Test](../images/debugging-client-test.png)](../images/debugging-client-test.png)
 
 ### Running/Debugging the Client
 Actually running and debugging the client is unfortunately a bit more complex. You'll need to create
