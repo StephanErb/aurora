@@ -9,7 +9,7 @@ When Aurora reads a configuration file and finds a `Job` definition, it:
     `Task`'s life cycle.
 
 
-![Life of a task](images/lifeofatask.png)
+![Life of a task](../images/lifeofatask.png)
 
 Please note, a couple of task states described below are missing from
 this state diagram.
