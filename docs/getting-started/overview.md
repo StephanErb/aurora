@@ -1,7 +1,9 @@
 Aurora System Overview
 ======================
 
-
+Apache Aurora is a service scheduler that runs on top of Apache Mesos, enabling you to run
+long-running services and cron jobs that take advantage of Apache Mesos' scalability,
+fault-tolerance, and resource isolation.
 
 
 Components
@@ -13,7 +15,7 @@ a functioning Aurora cluster.
 ![Aurora Components](../images/components.png)
 
 * **Aurora scheduler**
-  The scheduler will be your primary interface to the work you run in your cluster.  You will
+  The scheduler is your primary interface to the work you run in your cluster.  You will
   instruct it to run jobs, and it will manage them in Mesos for you.  You will also frequently use
   the scheduler's read-only web interface as a heads-up display for what's running in your cluster.
 

@@ -1,5 +1,5 @@
-Getting Started
-===============
+A local Cluster with Vagrant
+============================
 
 This document shows you how to configure a complete cluster using a virtual machine. This setup
 replicates a real cluster in your development machine as closely as possible. After you complete

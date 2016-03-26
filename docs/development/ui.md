@@ -25,6 +25,7 @@ use the following commands to view and modify the bower repo at
     bower update <library name>
     bower help
 
+
 Faster Iteration in Vagrant
 ---------------------------
 The scheduler serves UI assets from the classpath. For production deployments this means the assets

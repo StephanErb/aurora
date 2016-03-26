@@ -50,3 +50,21 @@ And this job configuration:
 The job configuration is indicating that it should only be scheduled on slaves with the attribute
 `dedicated:db_team/redis`.  Additionally, Aurora will prevent any tasks that do _not_ have that
 constraint from running on those slaves.
+
+
+
+
+## Best practices
+### Diversity
+Data centers are often organized with hierarchical failure domains.  Common failure domains
+include hosts, racks, rows, and PDUs.  If you have this information available, it is wise to tag
+the mesos-slave with them as
+[attributes](https://mesos.apache.org/documentation/attributes-resources/).
+
+When it comes time to schedule jobs, Aurora will automatically spread them across the failure
+domains as specified in the
+[job configuration](configuration-reference.md#specifying-scheduling-constraints).
+
+Note: in virtualized environments like EC2, the only attribute that usually makes sense for this
+purpose is `host`.
+

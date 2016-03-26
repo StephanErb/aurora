@@ -1,6 +1,8 @@
 Committer's Guide
 =================
 
+Information for official Apache Aurora committers.
+
 Setting up your email account
 -----------------------------
 Once your Apache ID has been set up you can configure your account and add ssh keys and setup an

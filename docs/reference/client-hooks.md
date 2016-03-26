@@ -1,6 +1,13 @@
 # Hooks for Aurora Client API
 
-- [Introduction](#introduction)
+You can execute hook methods around Aurora API Client methods when they are called by the Aurora Command Line commands.
+
+Explaining how hooks work is a bit tricky because of some indirection about what they apply to. Basically, a hook is code that executes when a particular Aurora Client API method runs, letting you extend the method's actions. The hook executes on the client side, specifically on the machine executing Aurora commands.
+
+The catch is that hooks are associated with Aurora Client API methods, which users don't directly call. Instead, users call Aurora Command Line commands, which call Client API methods during their execution. Since which hooks run depend on which Client API methods get called, you will need to know which Command Line commands call which API methods. Later on, there is a table showing the various associations.
+
+**Terminology Note**: From now on, "method(s)" refer to Client API methods, and "command(s)" refer to Command Line commands.
+
 - [Hook Types](#hook-types)
 - [Execution Order](#execution-order)
 - [Hookable Methods](#hookable-methods)
@@ -14,15 +21,6 @@
 - [Generic Hooks](#generic-hooks)
 - [Hooks Process Checklist](#hooks-process-checklist)
 
-## Introduction
-
-You can execute hook methods around Aurora API Client methods when they are called by the Aurora Command Line commands.
-
-Explaining how hooks work is a bit tricky because of some indirection about what they apply to. Basically, a hook is code that executes when a particular Aurora Client API method runs, letting you extend the method's actions. The hook executes on the client side, specifically on the machine executing Aurora commands.
-
-The catch is that hooks are associated with Aurora Client API methods, which users don't directly call. Instead, users call Aurora Command Line commands, which call Client API methods during their execution. Since which hooks run depend on which Client API methods get called, you will need to know which Command Line commands call which API methods. Later on, there is a table showing the various associations.
-
-**Terminology Note**: From now on, "method(s)" refer to Client API methods, and "command(s)" refer to Command Line commands.
 
 ## Hook Types
 

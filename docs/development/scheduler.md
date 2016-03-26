@@ -1,4 +1,7 @@
-Java code in the aurora repo is built with [Gradle](http://gradle.org).
+Developing the Aurora Scheduler
+===============================
+
+The Aurora scheduler is written in Java code and built with [Gradle](http://gradle.org).
 
 
 Prerequisite

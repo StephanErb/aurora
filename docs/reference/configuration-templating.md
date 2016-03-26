@@ -84,8 +84,7 @@ other objects: lists, dictionaries, and structurals. These will be
 described in detail later.
 
 
-Structurals in Pystachio / Aurora
----------------------------------
+### Structurals in Pystachio / Aurora
 
 Most Aurora/Thermos users don't ever (knowingly) interact with `String`,
 `Float`, or `Integer` Pystashio objects directly. Instead they interact

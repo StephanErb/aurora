@@ -1,3 +1,6 @@
+Securing your Aurora Cluster
+============================
+
 Aurora integrates with [Apache Shiro](http://shiro.apache.org/) to provide security
 controls for its API. In addition to providing some useful features out of the box, Shiro
 also allows Aurora cluster administrators to adapt the security system to their organization’s

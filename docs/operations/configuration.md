@@ -3,8 +3,6 @@
 The Aurora scheduler can take a variety of configuration options through command-line arguments.
 A list of the available options can be seen by running `aurora-scheduler -help`.
 
-Please refer to [Deploying the Aurora Scheduler](deploying-aurora-scheduler.md) for details on how
-to properly set the most important options.
 
 ### A Note on Configuration
 Like Mesos, Aurora uses command-line flags for runtime configuration. As such the Aurora
@@ -39,7 +37,6 @@ That way Aurora's current flags are visible in `ps` and in the `/vars` admin end
 
 Examples are available under `examples/scheduler/`. For a list of available Aurora flags and their
 documentation, see [this document](scheduler-configuration.md).
-
 
 
 ```

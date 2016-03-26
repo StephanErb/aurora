@@ -4,27 +4,14 @@ Source and binary distributions can be found on our
 [downloads](https://aurora.apache.org/downloads/) page.  Installing from binary packages is
 recommended for most.
 
-If our binay packages don't suite you, our package build toolchain makes it easy to build your
-own packages. See the
-[instructions](https://github.com/apache/aurora-packaging) to learn how.
-
-
 - [Installing the scheduler](#installing-the-scheduler)
-    - [Ubuntu Trusty](#ubuntu-trusty)
-    - [CentOS 7](#centos-7)
-    - [Finalizing](#finalizing)
-    - [Configuration](#configuration)
 - [Installing worker components](#installing-worker-components)
-    - [Ubuntu Trusty](#ubuntu-trusty-1)
-    - [CentOS 7](#centos-7-1)
-    - [Configuration](#configuration-1)
 - [Installing the client](#installing-the-client)
-    - [Ubuntu Trusty](#ubuntu-trusty-2)
-    - [CentOS 7](#centos-7-2)
-    - [Configuration](#configuration-2)
 - [Installing Mesos](#installing-mesos)
-    - [Mesos on Ubuntu Trusty](#mesos-on-ubuntu-trusty)
-    - [Mesos on CentOS 7](#mesos-on-centos-7)
+- [Troubleshooting](#troubleshooting)
+
+If our binay packages don't suite you, our package build toolchain makes it easy to build your
+own packages. See the [instructions](https://github.com/apache/aurora-packaging) to learn how.
 
 
 ## Machine profiles
@@ -315,12 +302,19 @@ is the same as the one on the scheduler:
     -mesos_master_address=zk://$ZK_HOST:2181/mesos/master
 
 
-## Running Aurora
-Configure a supervisor like [Monit](http://mmonit.com/monit/) or
-[supervisord](http://supervisord.org/) to run the created `scheduler.sh` file and restart it
-whenever it fails. Aurora expects to be restarted by an external process when it fails. Aurora
-supports an active health checking protocol on its admin HTTP interface - if a `GET /health` times
-out or returns anything other than `200 OK` the scheduler process is unhealthy and should be
+### Scheduler not running
+
+### Symptom
+The scheduler process commits suicide regularly. This happens under error conditions, but
+also on purpose in regular intervals.
+
+## Solution
+Aurora is meant to be run under supervision. You have to configure a supervisor like
+[Monit](http://mmonit.com/monit/) or [supervisord](http://supervisord.org/) to run the scheduler
+and restart it whenever it fails or exists on purpose.
+
+Aurora supports an active health checking protocol on its admin HTTP interface - if a `GET /health`
+times out or returns anything other than `200 OK` the scheduler process is unhealthy and should be
 restarted.
 
 For example, monit can be configured with
