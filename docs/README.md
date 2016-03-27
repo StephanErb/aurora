@@ -25,6 +25,15 @@ Description of important Aurora features.
  * [Service Discovery](features/service-discovery.md)
  * [SLA Metrics](features/sla-metrics.md)
 
+## Operators
+For those that wish to manage and fine-tune an Aurora cluster.
+
+ * [Installation](operations/installation.md)
+ * [Configuration](operations/configuration.md)
+ * [Monitoring](operations/monitoring.md)
+ * [Security](operations/security.md)
+ * [Storage](operations/storage.md)
+ * [Backup](operations/backup-restore.md)
 
 ## Reference
 The complete reference of commands, configuration options, and scheduler internals.
@@ -41,17 +50,9 @@ The complete reference of commands, configuration options, and scheduler interna
     - [Client Cluster Configuration](reference/client-cluster-configuration.md)
  * [Scheduler Configuration](reference/scheduler-configuration.md)
 
-
-## Operators
-For those that wish to manage and fine-tune an Aurora cluster.
-
- * [Installation](operations/installation.md)
- * [Configuration](operations/configuration.md)
- * [Monitoring](operations/monitoring.md)
- * [Security](operations/security.md)
- * [Storage](operations/storage.md)
- * [Backup](operations/backup-restore.md)
-
+## Additional Resources
+ * [Tools integrating with Aurora](additional-resources/tools.md)
+ * [Presentation videos and slides](additional-resources/presentations.md)
 
 ## Developers
 All the information you need to start modifying Aurora and contributing back to the project.
@@ -67,6 +68,3 @@ All the information you need to start modifying Aurora and contributing back to 
      - [Thrift structures](development/thrift.md)
 
 
-## Additional Resources
- * [Tools integrating with Aurora](additional-resources/tools.md)
- * [Presentation videos and slides](additional-resources/presentations.md)

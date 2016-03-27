@@ -1,7 +1,7 @@
 Services: Long running jobs
 ===========================
 
-Services are differentiated from non-service Jobs in that they always restart on completion,
+Services are differentiated from non-service jobs in that they always restart on completion,
 whether successful or unsuccessful. This is useful for long-running processes
 such as webservices that should always be running, unless stopped explicitly.
 
