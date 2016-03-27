@@ -121,6 +121,6 @@ that would undermine the goal of ensuring backwards compatibility.
 The most common reason to add a new checkpoint file would be to provide
 coverage for new thermos features that alter the data format. This is
 accomplished by writing and running a
-[job configuration](configuration-reference.md) that exercises the feature, and
+[job configuration](reference/configuration.md) that exercises the feature, and
 copying the checkpoint file from the sandbox directory, by default this is
 `/var/run/thermos/checkpoints/<aurora task id>`.

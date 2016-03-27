@@ -9,7 +9,6 @@
     - [Write lifecycle](#write-lifecycle)
   - [Atomicity, consistency and isolation](#atomicity-consistency-and-isolation)
   - [Population on restart](#population-on-restart)
-  - [Population on restart](#population-on-restart)
 
 
 ## Overview
@@ -62,7 +61,7 @@ and general performance considerations justify the existence of the volatile in-
 #### Read lifecycle
 
 There are two types of reads available in Aurora: consistent and weakly-consistent. The difference
-is explained [below](#atomicity-and-isolation).
+is explained [below](#atomicity-consistency-and-isolation).
 
 All reads are served from the volatile storage making reads generally cheap storage operations
 from the performance standpoint. The majority of the volatile stores are represented by the

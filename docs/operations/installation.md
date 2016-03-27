@@ -231,7 +231,7 @@ Client configuration lives in a json file that describes the clusters available 
 them.  By default this file is at `/etc/aurora/clusters.json`.
 
 Jobs may be submitted to the scheduler using the client, and are described with
-[job configurations](configuration-reference.md) expressed in `.aurora` files.  Typically you will
+[job configurations](reference/configuration.md) expressed in `.aurora` files.  Typically you will
 maintain a single job configuration file to describe one or more deployment environments (e.g.
 dev, test, prod) for a production job.
 

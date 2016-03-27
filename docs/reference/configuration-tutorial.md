@@ -7,7 +7,7 @@ and best practices. When writing a configuration file, make use of
 arguments as `aurora job create` or `aurora update start`. It first ensures the
 configuration parses, then outputs it in human-readable form.
 
-You should read this after going through the general [Aurora Tutorial](tutorial.md).
+You should read this after going through the general [Aurora Tutorial](getting-started/tutorial.md).
 
 - [The Basics](#user-content-the-basics)
 	- [Use Bottom-To-Top Object Ordering](#user-content-use-bottom-to-top-object-ordering)
@@ -20,6 +20,7 @@ You should read this after going through the general [Aurora Tutorial](tutorial.
 	- [Combining tasks](#user-content-combining-tasks)
 - [Defining Job Objects](#user-content-defining-job-objects)
 - [The jobs List](#user-content-the-jobs-list)
+- [Basic Examples](#basic-examples)
 
 
 The Basics
@@ -214,7 +215,7 @@ above multiple `Process` definitions into just two.
 
     run_task = SequentialTask(processes = [stage, run])
 
-`Process` also has optional attributes to customize its behaviour. Details can be found in the [*Aurora+Thermos Configuration Reference*](configuration-reference.md#process-objects).
+`Process` also has optional attributes to customize its behaviour. Details can be found in the [Aurora Configuration Reference](reference/configuration.md#process-objects).
 
 
 ## Getting Your Code Into The Sandbox
@@ -275,7 +276,7 @@ A basic Task definition looks like:
                             ram = 1*GB,
                             disk = 1*GB))
 
-A Task has optional attributes to customize its behaviour. Details can be found in the [*Aurora+Thermos Configuration Reference*](configuration-reference.md#task-object)
+A Task has optional attributes to customize its behaviour. Details can be found in the [Aurora Configuration Reference](reference/configuration.md#task-object)
 
 
 ### SequentialTask: Running Processes in Parallel or Sequentially
@@ -432,7 +433,7 @@ default. For these four parameters, a Job definition might look like:
               task = foo_task)
 
 In addition to the required attributes, there are several optional
-attributes. Details can be found in the [Aurora+Thermos Configuration Reference](configuration-reference.md#job-objects).
+attributes. Details can be found in the [Aurora Configuration Reference](reference/configuration.md#job-objects).
 
 
 ## The jobs List
@@ -448,3 +449,63 @@ starting, updating, or killing them.
 
 
 
+Basic Examples
+==============
+
+These are provided to give a basic understanding of simple Aurora jobs.
+
+### hello_world.aurora
+
+Put the following in a file named `hello_world.aurora`, substituting your own values
+for values such as `cluster`s.
+
+    import os
+    hello_world_process = Process(name = 'hello_world', cmdline = 'echo hello world')
+
+    hello_world_task = Task(
+      resources = Resources(cpu = 0.1, ram = 16 * MB, disk = 16 * MB),
+      processes = [hello_world_process])
+
+    hello_world_job = Job(
+      cluster = 'cluster1',
+      role = os.getenv('USER'),
+      task = hello_world_task)
+
+    jobs = [hello_world_job]
+
+Then issue the following commands to create and kill the job, using your own values for the job key.
+
+    aurora job create cluster1/$USER/test/hello_world hello_world.aurora
+
+    aurora job kill cluster1/$USER/test/hello_world
+
+### Environment Tailoring
+
+Put the following in a file named `hello_world_productionized.aurora`, substituting your own values
+for values such as `cluster`s.
+
+    include('hello_world.aurora')
+
+    production_resources = Resources(cpu = 1.0, ram = 512 * MB, disk = 2 * GB)
+    staging_resources = Resources(cpu = 0.1, ram = 32 * MB, disk = 512 * MB)
+    hello_world_template = hello_world(
+        name = "hello_world-{{cluster}}"
+        task = hello_world(resources=production_resources))
+
+    jobs = [
+      # production jobs
+      hello_world_template(cluster = 'cluster1', instances = 25),
+      hello_world_template(cluster = 'cluster2', instances = 15),
+
+      # staging jobs
+      hello_world_template(
+        cluster = 'local',
+        instances = 1,
+        task = hello_world(resources=staging_resources)),
+    ]
+
+Then issue the following commands to create and kill the job, using your own values for the job key
+
+    aurora job create cluster1/$USER/test/hello_world-cluster1 hello_world_productionized.aurora
+
+    aurora job kill cluster1/$USER/test/hello_world-cluster1

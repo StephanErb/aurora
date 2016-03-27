@@ -1,7 +1,15 @@
 Aurora Configuration Reference
 ==============================
 
-- [Introduction](#introduction)
+Don't know where to start? The Aurora configuration schema is very
+powerful, and configurations can become quite complex for advanced use
+cases.
+
+For examples of simple configurations to get something up and running
+quickly, check out the [Tutorial](getting-started/tutorial.md). When you feel comfortable with the basics, move
+on to the [Configuration Tutorial](reference/configuration-tutorial.md) for more in-depth coverage of
+configuration design.
+
 - [Process Schema](#process-schema)
     - [Process Objects](#process-objects)
 - [Task Schema](#task-schema)
@@ -10,35 +18,16 @@ Aurora Configuration Reference
     - [Resource Object](#resource-object)
 - [Job Schema](#job-schema)
     - [Job Objects](#job-objects)
-    - [Services](#services)
     - [UpdateConfig Objects](#updateconfig-objects)
     - [HealthCheckConfig Objects](#healthcheckconfig-objects)
     - [Announcer Objects](#announcer-objects)
     - [Container Objects](#container)
     - [LifecycleConfig Objects](#lifecycleconfig-objects)
 - [Specifying Scheduling Constraints](#specifying-scheduling-constraints)
-- [Executor Wrapper](#executor-wrapper)
 - [Template Namespaces](#template-namespaces)
     - [mesos Namespace](#mesos-namespace)
     - [thermos Namespace](#thermos-namespace)
-- [Basic Examples](#basic-examples)
-    - [hello_world.aurora](#hello_worldaurora)
-    - [Environment Tailoring](#environment-tailoring)
-      - [hello_world_productionized.aurora](#hello_world_productionizedaurora)
 
-Introduction
-============
-
-Don't know where to start? The Aurora configuration schema is very
-powerful, and configurations can become quite complex for advanced use
-cases.
-
-For examples of simple configurations to get something up and running
-quickly, check out the [Tutorial](tutorial.md). When you feel comfortable with the basics, move
-on to the [Configuration Tutorial](configuration-tutorial.md) for more in-depth coverage of
-configuration design.
-
-For additional basic configuration examples, see [the end of this document](#BasicExamples).
 
 Process Schema
 ==============
@@ -231,7 +220,6 @@ The `order` function accepts Process name strings `('foo', 'bar')` or the proces
 themselves, e.g. `foo=Process(name='foo', ...)`, `bar=Process(name='bar', ...)`,
 `constraints=order(foo, bar)`.
 
-
 #### resources
 
 Takes a `Resource` object, which specifies the amounts of CPU, memory, and disk space resources
@@ -258,8 +246,6 @@ failed, and the `succeeding` Process could succeed on the first run. However,
 the task would succeed despite only allowing for two failed processes. To be more
 specific, there would be 10 failed process runs yet 1 failed process. Both processes
 would have to fail for the Task to fail.
-
-
 
 #### max_concurrency
 
@@ -327,7 +313,7 @@ ordering constraints.
 ### Resource Object
 
 Specifies the amount of CPU, Ram, and disk resources the task needs. See the
-[Resource Isolation document](resources.md) for suggested values and to understand how
+[Resource Isolation document](features/resource-isolation.md) for suggested values and to understand how
 resources are allocated.
 
   param      | type    | description
@@ -364,16 +350,6 @@ Job Schema
   ```lifecycle``` | ```LifecycleConfig``` object | An optional task lifecycle configuration that dictates commands to be executed on startup/teardown.  HTTP lifecycle is enabled by default if the "health" port is requested.  See [LifecycleConfig Objects](#lifecycleconfig-objects) for more information.
   ```tier``` | String | Task tier type. When set to `revocable` requires the task to run with Mesos revocable resources. This is work [in progress](https://issues.apache.org/jira/browse/AURORA-1343) and is currently only supported for the revocable tasks. The ultimate goal is to simplify task configuration by hiding various configuration knobs behind a task tier definition. See AURORA-1343 and AURORA-1443 for more details.
 
-### Services
-
-Jobs with the `service` flag set to True are called Services. The `Service`
-alias can be used as shorthand for `Job` with `service=True`.
-Services are differentiated from non-service Jobs in that tasks
-always restart on completion, whether successful or unsuccessful.
-Jobs without the service bit set only restart up to
-`max_task_failures` times and only if they terminated unsuccessfully
-either due to human error or machine failure.
-
 
 ### UpdateConfig Objects
 
@@ -387,7 +363,7 @@ Parameters for controlling the rate and policy of rolling updates.
 | ```max_total_failures```     | Integer  | Maximum number of shard failures to be tolerated in total during an update. Cannot be greater than or equal to the total number of tasks in a job. (Default: 0)
 | ```rollback_on_failure```    | boolean  | When False, prevents auto rollback of a failed update (Default: True)
 | ```wait_for_batch_completion```| boolean | When True, all threads from a given batch will be blocked from picking up new instances until the entire batch is updated. This essentially simulates the legacy sequential updater algorithm. (Default: False)
-| ```pulse_interval_secs```    | Integer  |  Indicates a [coordinated update](client-commands.md#user-content-coordinated-job-updates). If no pulses are received within the provided interval the update will be blocked. Beta-updater only. Will fail on submission when used with client updater. (Default: None)
+| ```pulse_interval_secs```    | Integer  |  Indicates a [coordinated update](reference/client-commands.md#user-content-coordinated-job-updates). If no pulses are received within the provided interval the update will be blocked. Beta-updater only. Will fail on submission when used with client updater. (Default: None)
 
 ### HealthCheckConfig Objects
 
@@ -409,7 +385,6 @@ Parameters for controlling a task's health checks via HTTP or a shell command.
 | ```http```                     | HttpHealthChecker  | Configure health check to use HTTP. (Default)
 | ```shell```                    | ShellHealthChecker | Configure health check via a shell command.
 
-
 ### HttpHealthChecker Objects
 | param                          | type      | description
 | -------                        | :-------: | --------
@@ -428,13 +403,14 @@ Parameters for controlling a task's health checks via HTTP or a shell command.
 If the `announce` field in the Job configuration is set, each task will be
 registered in the ServerSet `/aurora/role/environment/jobname` in the
 zookeeper ensemble configured by the executor (which can be optionally overriden by specifying
-zk_path parameter).  If no Announcer object is specified,
-no announcement will take place.  For more information about ServerSets, see the [User Guide](user-guide.md).
+`zk_path` parameter).  If no Announcer object is specified,
+no announcement will take place.  For more information about ServerSets, see the [Service Discover](features/service-discovery.md)
+documentation.
 
 By default, the hostname in the registered endpoints will be the `--hostname` parameter
 that is passed to the mesos slave. To override the hostname value, the executor can be started
 with `--announcer-hostname=<overriden_value>`. If you decide to use `--announcer-hostname` and if
-the overriden value needs to change for every executor, then the executor has to be started inside a wrapper, see [Executor Wrapper](#executor-wrapper).
+the overriden value needs to change for every executor, then the executor has to be started inside a wrapper, see [Executor Wrapper](operations/configuration.md#thermos-executor-wrapper).
 
 For example, if you want the hostname in the endpoint to be an IP address instead of the hostname,
 the `--hostname` parameter to the mesos slave can be set to the machine IP or the executor can
@@ -443,10 +419,10 @@ be started with `--announcer-hostname=<host_ip>` while wrapping the executor ins
 | object                         | type      | description
 | -------                        | :-------: | --------
 | ```primary_port```             | String    | Which named port to register as the primary endpoint in the ServerSet (Default: `http`)
-| ```portmap```                  | dict      | A mapping of additional endpoints to announced in the ServerSet (Default: `{ 'aurora': '{{primary_port}}' }`)
-| ```zk_path```                  | String    | Zookeeper serverset path override (executor must be started with the --announcer-allow-custom-serverset-path parameter)
+| ```portmap```                  | dict      | A mapping of additional endpoints to be announced in the ServerSet (Default: `{ 'aurora': '{{primary_port}}' }`)
+| ```zk_path```                  | String    | Zookeeper serverset path override (executor must be started with the `--announcer-allow-custom-serverset-path` parameter)
 
-### Port aliasing with the Announcer `portmap`
+#### Port aliasing with the Announcer `portmap`
 
 The primary endpoint registered in the ServerSet is the one allocated to the port
 specified by the `primary_port` in the `Announcer` object, by default
@@ -571,19 +547,6 @@ most one task per rack:
 Use these constraints sparingly as they can dramatically reduce Tasks' schedulability.
 
 
-Executor Wrapper
-================
-
-If you need to do computation before starting the thermos executor (for example, setting a different
-`--announcer-hostname` parameter for every executor), then the thermos executor should be invoked
- inside a wrapper script. In such a case, the aurora scheduler should be started with
- `-thermos_executor_path` pointing to the wrapper script and `-thermos_executor_resources`
- set to a comma separated string of all the resources that should be copied into
- the sandbox (including the original thermos executor).
-
-For example, to wrap the executor inside a simple wrapper, the scheduler will be started like this
-`-thermos_executor_path=/path/to/wrapper.sh -thermos_executor_resources=/usr/share/aurora/bin/thermos_executor.pex`
-
 Template Namespaces
 ===================
 
@@ -627,65 +590,3 @@ configuration, it is automatically extracted and auto-populated by
 Aurora, but must be specified with, for example, `thermos -P http:12345`
 to map `http` to port 12345 when running via the CLI.
 
-Basic Examples
-==============
-
-These are provided to give a basic understanding of simple Aurora jobs.
-
-### hello_world.aurora
-
-Put the following in a file named `hello_world.aurora`, substituting your own values
-for values such as `cluster`s.
-
-    import os
-    hello_world_process = Process(name = 'hello_world', cmdline = 'echo hello world')
-
-    hello_world_task = Task(
-      resources = Resources(cpu = 0.1, ram = 16 * MB, disk = 16 * MB),
-      processes = [hello_world_process])
-
-    hello_world_job = Job(
-      cluster = 'cluster1',
-      role = os.getenv('USER'),
-      task = hello_world_task)
-
-    jobs = [hello_world_job]
-
-Then issue the following commands to create and kill the job, using your own values for the job key.
-
-    aurora job create cluster1/$USER/test/hello_world hello_world.aurora
-
-    aurora job kill cluster1/$USER/test/hello_world
-
-### Environment Tailoring
-
-#### hello_world_productionized.aurora
-
-Put the following in a file named `hello_world_productionized.aurora`, substituting your own values
-for values such as `cluster`s.
-
-    include('hello_world.aurora')
-
-    production_resources = Resources(cpu = 1.0, ram = 512 * MB, disk = 2 * GB)
-    staging_resources = Resources(cpu = 0.1, ram = 32 * MB, disk = 512 * MB)
-    hello_world_template = hello_world(
-        name = "hello_world-{{cluster}}"
-        task = hello_world(resources=production_resources))
-
-    jobs = [
-      # production jobs
-      hello_world_template(cluster = 'cluster1', instances = 25),
-      hello_world_template(cluster = 'cluster2', instances = 15),
-
-      # staging jobs
-      hello_world_template(
-        cluster = 'local',
-        instances = 1,
-        task = hello_world(resources=staging_resources)),
-    ]
-
-Then issue the following commands to create and kill the job, using your own values for the job key
-
-    aurora job create cluster1/$USER/test/hello_world-cluster1 hello_world_productionized.aurora
-
-    aurora job kill cluster1/$USER/test/hello_world-cluster1

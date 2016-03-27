@@ -156,29 +156,8 @@ already exists. Use `aurora update start` to add instances with a new (updated) 
 
 ### Updating a Job
 
-There are several sub-commands to manage job updates:
-
-    aurora update start <job key> <configuration file>
-    aurora update info <job key>
-    aurora update pause <job key>
-    aurora update resume <job key>
-    aurora update abort <job key>
-    aurora update list <cluster>
-
-When you `start` a job update, the command will return once it has sent the
-instructions to the scheduler.  At that point, you may view detailed
-progress for the update with the `info` subcommand, in addition to viewing
-graphical progress in the web browser.  You may also get a full listing of
-in-progress updates in a cluster with `list`.
-
-Once an update has been started, you can `pause` to keep the update but halt
-progress.  This can be useful for doing things like debug a  partially-updated
-job to determine whether you would like to proceed.  You can `resume` to
-proceed.
-
-You may `abort` a job update regardless of the state it is in. This will
-instruct the scheduler to completely abandon the job update and leave the job
-in the current (possibly partially-updated) state.
+You can manage job updates using the `aurora update` command.  Please see
+[the Job Update documentation](features/job-updates.md) for more details.
 
 
 ### Renaming a Job
@@ -233,10 +212,7 @@ Cron Jobs
 ---------
 
 You can manage cron jobs using the `aurora cron` command.  Please see
-[cron-jobs.md](cron-jobs.md) for more details.
-
-You will see various commands and options relating to cron jobs in
-`aurora -h` and similar. Ignore them, as they're not yet implemented.
+[the Cron Jobs Feature](features/cron-jobs.md) for more details.
 
 Comparing Jobs
 --------------
@@ -270,9 +246,9 @@ configuration file, and displays the parsed configuration.
 
     aurora quota get CLUSTER/ROLE
 
-  Prints the production quota allocated to the role's value at the given
-cluster. Only non-[dedicated](deploying-aurora-scheduler.md#dedicated-attribute)
-[production](configuration-reference.md#job-objects) jobs consume quota.
+Prints the production quota allocated to the role's value at the given
+cluster. Only non-[dedicated](features/constraints.md#dedicated-attribute)
+[production](reference/configuration.md#job-objects) jobs consume quota.
 
 ### Finding a Job on Web UI
 

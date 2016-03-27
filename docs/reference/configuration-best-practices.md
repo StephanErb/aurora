@@ -57,7 +57,7 @@ limit to 5 and a `min_duration` to 1. This is an opportunity for factoring
 into a common process template.
 
 Furthermore, the Python version is repeated everywhere. This can be
-bound via structural templating as described in the [Advanced Binding](#AdvancedBinding)
+bound via structural templating as described in the [Advanced Binding](reference/configuration-templating.md#AdvancedBinding)
 section.
 
 `less_redundant.aurora` contains:

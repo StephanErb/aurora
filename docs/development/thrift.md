@@ -52,6 +52,6 @@ Testing
 -------
 It's always advisable to test your changes in the local vagrant environment to build more
 confidence that you change is backwards compatible. It's easy to simulate different
-client/scheduler versions by playing with `aurorabuild` command. See [this document](vagrant.md)
+client/scheduler versions by playing with `aurorabuild` command. See [this document](getting-started/vagrant.md)
 for more.
 

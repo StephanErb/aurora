@@ -15,19 +15,19 @@ Information for everyone new to Apache Aurora.
 ## Features
 Description of important Aurora features.
 
- * [Containers](features/containers.md) (i.e. docker)
+ * [Containers](features/containers.md)
  * [Cron Jobs](features/cron-jobs.md)
- * [Health Checking](features/health-checks.md)
- * [Job Tiers](features/job-tiers.md) (i.e. namespaces, priorities, preemption, oversubscription)
  * [Job Updates](features/job-updates.md)
+ * [Multitenancy](features/multitenancy.md)
  * [Resource Isolation](features/resource-isolation.md)
  * [Scheduling Constraints](features/constraints.md)
+ * [Services](features/services.md)
  * [Service Discovery](features/service-discovery.md)
  * [SLA Metrics](features/sla-metrics.md)
 
 
 ## Reference
-The complete reference of commands and configuration options.
+The complete reference of commands, configuration options, and scheduler internals.
 
  * [Task lifecycle](reference/task-lifecycle.md)
  * Configuration (`.aurora` files)

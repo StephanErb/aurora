@@ -5,7 +5,7 @@ The `.aurora` file format is just Python. However, `Job`, `Task`,
 `Process`, and other classes are defined by a templating library called
 *Pystachio*, a powerful tool for configuration specification and reuse.
 
-[Aurora+Thermos Configuration Reference](configuration-reference.md)
+[Aurora Configuration Reference](reference/configuration.md)
 has a full reference of all Aurora/Thermos defined Pystachio objects.
 
 When writing your `.aurora` file, you may use any Pystachio datatypes, as

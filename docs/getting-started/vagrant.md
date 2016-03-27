@@ -100,7 +100,7 @@ Run your first job
 ------------------
 
 Now that your cluster is up and running, you are ready to define and run your first job in Aurora.
-For more information, see the [Aurora Tutorial](tutorial.md).
+For more information, see the [Aurora Tutorial](getting-started/tutorial.md).
 
 
 Rebuild components
