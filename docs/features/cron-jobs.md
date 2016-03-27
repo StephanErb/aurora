@@ -20,11 +20,11 @@ Aurora supports execution of scheduled jobs on a Mesos cluster using cron-style 
 
 A job is identified as a cron job by the presence of a
 `cron_schedule` attribute containing a cron-style schedule in the
-[`Job`](reference/configuration.md#job-objects) object. Examples of cron schedules
+[`Job`](../reference/configuration.md#job-objects) object. Examples of cron schedules
 include "every 5 minutes" (`*/5 * * * *`), "Fridays at 17:00" (`* 17 * * FRI`), and
 "the 1st and 15th day of the month at 03:00" (`0 3 1,15 *`).
 
-Example (available in the [Vagrant environment](getting-started/vagrant.md)):
+Example (available in the [Vagrant environment](../getting-started/vagrant.md)):
 
     $ cat /vagrant/examples/jobs/cron_hello_world.aurora
     # A cron job that runs every 5 minutes.
@@ -58,7 +58,7 @@ grow faster than they can process it.
 
 Unlike with services, which aurora will always re-execute regardless of exit status, instances of
 cron jobs retry according to the `max_task_failures` attribute of the
-[Task](reference/configuration.md#task-objects) object. To get "run-until-success" semantics,
+[Task](../reference/configuration.md#task-objects) object. To get "run-until-success" semantics,
 set `max_task_failures` to `-1`.
 
 ## Interacting with cron jobs via the Aurora CLI

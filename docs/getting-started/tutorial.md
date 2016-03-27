@@ -15,9 +15,9 @@ to start getting up to speed on the system.
 
 ## Prerequisite
 
-This tutorial assumes you are running [Aurora locally using Vagrant](getting-started/vagrant.md).
+This tutorial assumes you are running [Aurora locally using Vagrant](vagrant.md).
 However, in general the instructions are also applicable to any other
-[Aurora installation](operations/installation.md).
+[Aurora installation](../operations/installation.md).
 
 Unless otherwise stated, all commands are to be run from the root of the aurora
 repository clone.
@@ -132,7 +132,7 @@ When comparing two job keys, if any of the four parts is different from
 its counterpart in the other key, then the two job keys identify two separate
 jobs. If all four values are identical, the job keys identify the same job.
 
-The `clusters.json` [client configuration](reference/client-cluster-configuration.md)
+The `clusters.json` [client configuration](../reference/client-cluster-configuration.md)
 for the Aurora scheduler defines the available cluster names.
 For Vagrant, from the top-level of your Aurora repository clone, do:
 
@@ -251,8 +251,8 @@ The job page now shows the `hello_world` tasks as completed.
 
 Now that you've finished this Tutorial, you should read or do the following:
 
-- [The Aurora Configuration Tutorial](reference/configuration-tutorial.md), which provides more examples
+- [The Aurora Configuration Tutorial](../reference/configuration-tutorial.md), which provides more examples
   and best practices for writing Aurora configurations. You should also look at
-  the [Aurora Configuration Reference](reference/configuration.md).
+  the [Aurora Configuration Reference](../reference/configuration.md).
 - Explore the Aurora Client - use `aurora -h`, and read the
-  [Aurora Client Commands](reference/client-commands.md) document.
+  [Aurora Client Commands](../reference/client-commands.md) document.

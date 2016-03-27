@@ -90,4 +90,4 @@ URL of your VIP in a loadbalancer or a roundrobin DNS name.
 
 The identifier of an authentication mechanism that the client should use when communicating with the
 scheduler. Support for values other than `UNAUTHENTICATED` requires a matching scheduler-side
-[security configuration](operations/security.md).
+[security configuration](../operations/security.md).

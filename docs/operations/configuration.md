@@ -2,7 +2,7 @@
 
 The Aurora scheduler can take a variety of configuration options through command-line arguments.
 Examples are available under `examples/scheduler/`. For a list of available Aurora flags and their
-documentation, see [Scheduler Configuration Reference](reference/scheduler-configuration.md).
+documentation, see [Scheduler Configuration Reference](../reference/scheduler-configuration.md).
 
 
 ## A Note on Configuration
@@ -69,7 +69,7 @@ for Mesos replicated log files to ensure optimal storage performance.
 ### `-native_log_zk_group_path`
 ZooKeeper path used for Mesos replicated log quorum discovery.
 
-See [code](../src/main/java/org/apache/aurora/scheduler/log/mesos/MesosLogStreamModule.java) for
+See [code](../../src/main/java/org/apache/aurora/scheduler/log/mesos/MesosLogStreamModule.java) for
 other available Mesos replicated log configuration options and default values.
 
 ### Changing the Quorum Size
@@ -83,7 +83,7 @@ When updating from 3 to 5 schedulers, the quorum size would grow from 2 to 3.
 When starting the new schedulers, use the `-native_log_quorum_size` set to the new value. Failing to
 first increase the quorum size on running schedulers can in some cases result in corruption
 or truncating of the replicated log used by Aurora. In that case, see the documentation on
-[recovering from backup](operations/backup-restore.md).
+[recovering from backup](backup-restore.md).
 
 
 ## Backup Configuration
@@ -112,7 +112,7 @@ argument to the Aurora scheduler):
 
 `both` configuration will send logs to files and stream to parent stdout/stderr outputs.
 
-See [Configuration Reference](reference/configuration.md#logger) for all destination options.
+See [Configuration Reference](../reference/configuration.md#logger) for all destination options.
 
 ### Log rotation
 By default, Thermos will not rotate the stdout/stderr logs from child processes and they will grow

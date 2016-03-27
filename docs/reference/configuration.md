@@ -6,8 +6,8 @@ powerful, and configurations can become quite complex for advanced use
 cases.
 
 For examples of simple configurations to get something up and running
-quickly, check out the [Tutorial](getting-started/tutorial.md). When you feel comfortable with the basics, move
-on to the [Configuration Tutorial](reference/configuration-tutorial.md) for more in-depth coverage of
+quickly, check out the [Tutorial](../getting-started/tutorial.md). When you feel comfortable with the basics, move
+on to the [Configuration Tutorial](configuration-tutorial.md) for more in-depth coverage of
 configuration design.
 
 - [Process Schema](#process-schema)
@@ -313,7 +313,7 @@ ordering constraints.
 ### Resource Object
 
 Specifies the amount of CPU, Ram, and disk resources the task needs. See the
-[Resource Isolation document](features/resource-isolation.md) for suggested values and to understand how
+[Resource Isolation document](../features/resource-isolation.md) for suggested values and to understand how
 resources are allocated.
 
   param      | type    | description
@@ -363,7 +363,7 @@ Parameters for controlling the rate and policy of rolling updates.
 | ```max_total_failures```     | Integer  | Maximum number of shard failures to be tolerated in total during an update. Cannot be greater than or equal to the total number of tasks in a job. (Default: 0)
 | ```rollback_on_failure```    | boolean  | When False, prevents auto rollback of a failed update (Default: True)
 | ```wait_for_batch_completion```| boolean | When True, all threads from a given batch will be blocked from picking up new instances until the entire batch is updated. This essentially simulates the legacy sequential updater algorithm. (Default: False)
-| ```pulse_interval_secs```    | Integer  |  Indicates a [coordinated update](reference/client-commands.md#user-content-coordinated-job-updates). If no pulses are received within the provided interval the update will be blocked. Beta-updater only. Will fail on submission when used with client updater. (Default: None)
+| ```pulse_interval_secs```    | Integer  |  Indicates a [coordinated update](client-commands.md#user-content-coordinated-job-updates). If no pulses are received within the provided interval the update will be blocked. Beta-updater only. Will fail on submission when used with client updater. (Default: None)
 
 ### HealthCheckConfig Objects
 
@@ -404,13 +404,13 @@ If the `announce` field in the Job configuration is set, each task will be
 registered in the ServerSet `/aurora/role/environment/jobname` in the
 zookeeper ensemble configured by the executor (which can be optionally overriden by specifying
 `zk_path` parameter).  If no Announcer object is specified,
-no announcement will take place.  For more information about ServerSets, see the [Service Discover](features/service-discovery.md)
+no announcement will take place.  For more information about ServerSets, see the [Service Discover](../features/service-discovery.md)
 documentation.
 
 By default, the hostname in the registered endpoints will be the `--hostname` parameter
 that is passed to the mesos slave. To override the hostname value, the executor can be started
 with `--announcer-hostname=<overriden_value>`. If you decide to use `--announcer-hostname` and if
-the overriden value needs to change for every executor, then the executor has to be started inside a wrapper, see [Executor Wrapper](operations/configuration.md#thermos-executor-wrapper).
+the overriden value needs to change for every executor, then the executor has to be started inside a wrapper, see [Executor Wrapper](../operations/configuration.md#thermos-executor-wrapper).
 
 For example, if you want the hostname in the endpoint to be an IP address instead of the hostname,
 the `--hostname` parameter to the mesos slave can be set to the machine IP or the executor can

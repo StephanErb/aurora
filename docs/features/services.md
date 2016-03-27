@@ -10,10 +10,10 @@ Service Specification
 ---------------------
 
 A job is identified as a service by the presence of the flag
-``service=True` in the [`Job`](reference/configuration.md#job-objects) object.
+``service=True` in the [`Job`](../reference/configuration.md#job-objects) object.
 The `Service` alias can be used as shorthand for `Job` with `service=True`.
 
-Example (available in the [Vagrant environment](getting-started/vagrant.md)):
+Example (available in the [Vagrant environment](../getting-started/vagrant.md)):
 
     $ cat /vagrant/examples/jobs/hello_world.aurora
     hello = Process(
@@ -70,7 +70,7 @@ following requests:
 | `GET /health`           | Inquires whether the task is healthy.   |
 
 Please see the
-[configuration reference](reference/configuration.md#user-content-healthcheckconfig-objects) for
+[configuration reference](../reference/configuration.md#user-content-healthcheckconfig-objects) for
 configuration options for this feature.
 
 #### Snoozing Health Checks

@@ -1,4 +1,4 @@
-Aurora Job updates
+Aurora Job Updates
 ==================
 
 `Job` configurations can be updated at any point in their lifecycle.
@@ -60,7 +60,7 @@ from the point where the update failed. E.g.; (0,1,2) (3,4,5) (6,7,
 8-FAIL) results in a rollback in order (8,7,6) (5,4,3) (2,1,0).
 
 For details how to control a job update, please see the
-[UpdateConfig](reference/configuration.md#updateconfig-objects) configuration object.
+[UpdateConfig](../reference/configuration.md#updateconfig-objects) configuration object.
 
 
 Coordinated Job Updates
@@ -74,7 +74,7 @@ pulsing an active coordinated job update via a
 [pulseJobUpdate RPC](../../api/src/main/thrift/org/apache/aurora/gen/api.thrift).
 
 A coordinated update is defined by setting a positive
-[pulse_interval_secs](reference/configuration.md#updateconfig-objects) value in job configuration
+[pulse_interval_secs](../reference/configuration.md#updateconfig-objects) value in job configuration
 file. If no pulses are received within specified interval the update will be blocked. A blocked
 update is unable to continue rolling forward (or rolling back) but retains its active status.
 It may only be unblocked by a fresh `pulseJobUpdate` call.

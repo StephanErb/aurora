@@ -13,12 +13,12 @@ The Mesos slave has the `--attributes` command line argument which can be used t
 static attributes (not to be confused with `--resources`, which are dynamic and accounted).
 
 Aurora makes these attributes available for matching with scheduling
-[constraints](configuration-reference.md#specifying-scheduling-constraints).  Most of these
+[constraints](../reference/configuration.md#specifying-scheduling-constraints).  Most of these
 constraints are arbitrary and available for custom use.  There is one exception, though: the
 `dedicated` attribute.  Aurora treats this specially, and only allows matching jobs to run on these
 machines, and will only schedule matching jobs on these machines.
 
-See the [section](features/multitenancy.md) about resource quotas to learn how quotas apply to
+See the [section](multitenancy.md) about resource quotas to learn how quotas apply to
 dedicated jobs.
 
 ##### Syntax
@@ -69,7 +69,7 @@ the mesos-slave with them as
 
 When it comes time to schedule jobs, Aurora will automatically spread them across the failure
 domains as specified in the
-[job configuration](configuration-reference.md#specifying-scheduling-constraints).
+[job configuration](../reference/configuration.md#specifying-scheduling-constraints).
 
 Note: in virtualized environments like EC2, the only attribute that usually makes sense for this
 purpose is `host`.

@@ -15,7 +15,7 @@ Usually, it is a bad idea to restore a backup that is not extremely recent (i.e.
 hours). This is because the scheduler will expect the cluster to look exactly as the backup does,
 so any tasks that have been rescheduled since the backup was taken will be killed.
 
-Instructions below have been verified in [Vagrant environment](getting-started/vagrant.md) and with minor
+Instructions below have been verified in [Vagrant environment](../getting-started/vagrant.md) and with minor
 syntax/path changes should be applicable to any Aurora cluster.
 
 # Preparation
@@ -31,7 +31,7 @@ be erased after the backup snapshot is restored.
 
 * Configure `aurora_admin` access to run all commands listed in
   [Restore from backup](#restore-from-backup) section locally on the leading scheduler:
-  * Make sure the [clusters.json](reference/client-cluster-configuration.md) file configured to
+  * Make sure the [clusters.json](../reference/client-cluster-configuration.md) file configured to
     access scheduler directly. Set `scheduler_uri` setting and remove `zk`. Since leader can get
     re-elected during the restore steps, consider doing it on all scheduler replicas.
   * Depending on your particular security approach you will need to either turn off scheduler

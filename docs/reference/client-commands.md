@@ -108,7 +108,7 @@ Hooks can be associated with these Aurora Client commands.
   - `job restart`
 
 The process for writing and activating them is complex enough
-that we explain it in a devoted document, [Hooks for Aurora Client API](hooks.md).
+that we explain it in a devoted document, [Hooks for Aurora Client API](client-hooks.md).
 
 Regular Jobs
 ------------
@@ -157,7 +157,7 @@ already exists. Use `aurora update start` to add instances with a new (updated) 
 ### Updating a Job
 
 You can manage job updates using the `aurora update` command.  Please see
-[the Job Update documentation](features/job-updates.md) for more details.
+[the Job Update documentation](../features/job-updates.md) for more details.
 
 
 ### Renaming a Job
@@ -212,7 +212,7 @@ Cron Jobs
 ---------
 
 You can manage cron jobs using the `aurora cron` command.  Please see
-[the Cron Jobs Feature](features/cron-jobs.md) for more details.
+[the Cron Jobs Feature](../features/cron-jobs.md) for more details.
 
 Comparing Jobs
 --------------
@@ -247,8 +247,8 @@ configuration file, and displays the parsed configuration.
     aurora quota get CLUSTER/ROLE
 
 Prints the production quota allocated to the role's value at the given
-cluster. Only non-[dedicated](features/constraints.md#dedicated-attribute)
-[production](reference/configuration.md#job-objects) jobs consume quota.
+cluster. Only non-[dedicated](../features/constraints.md#dedicated-attribute)
+[production](configuration.md#job-objects) jobs consume quota.
 
 ### Finding a Job on Web UI
 

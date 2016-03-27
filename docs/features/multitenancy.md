@@ -57,12 +57,12 @@ jobs. If not configured properly revocable tasks will never get assigned to host
 
     -receive_revocable_resources=true
 
-Specify a tier configuration file path (unless you want to use the [default](../src/main/resources/org/apache/aurora/scheduler/tiers.json)):
+Specify a tier configuration file path (unless you want to use the [default](../../src/main/resources/org/apache/aurora/scheduler/tiers.json)):
 
     -tier_config=path/to/tiers/config.json
 
 
-See the [Configuration Reference](references/configuration.md) for details on how to mark a job
+See the [Configuration Reference](../references/configuration.md) for details on how to mark a job
 as being revocable.
 
 
@@ -76,15 +76,15 @@ In order to guarantee that important production jobs are always running, Aurora 
 preemption.
 
 Under a particular resource shortage pressure, tasks from
-[production](reference/configuration.md#job-objects) jobs may preempt tasks from any non-production
+[production](../reference/configuration.md#job-objects) jobs may preempt tasks from any non-production
 job. A production task may only be preempted by tasks from production jobs in the same role with
-higher [priority](reference/configuration.md#job-objects).
+higher [priority](../reference/configuration.md#job-objects).
 
 Aurora requires resource quotas for
-[production non-dedicated jobs](reference/configuration.md#job-objects). Quota is enforced at
+[production non-dedicated jobs](../reference/configuration.md#job-objects). Quota is enforced at
 the job role level and when set, defines a non-preemptible pool of compute resources within
 that role. All job types (service, adhoc or cron) require role resource quota unless a job has
-[dedicated constraint set](features/constraints.md#dedicated-attribute).
+[dedicated constraint set](constraints.md#dedicated-attribute).
 
 To grant quota to a particular role in production, an operator can use the command
 `aurora_admin set_quota`.

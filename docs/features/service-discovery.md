@@ -11,4 +11,4 @@ of which there are several reference implementations:
 
 These can also be used natively in Finagle using the [ZookeeperServerSetCluster](https://github.com/twitter/finagle/blob/master/finagle-serversets/src/main/scala/com/twitter/finagle/zookeeper/ZookeeperServerSetCluster.scala).
 
-For more information about how to configure announcing, see the [Configuration Reference](reference/configuration.md).
+For more information about how to configure announcing, see the [Configuration Reference](../reference/configuration.md).

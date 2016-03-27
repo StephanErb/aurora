@@ -3,7 +3,7 @@
 The Aurora scheduler can take a variety of configuration options through command-line arguments.
 A list of the available options can be seen by running `aurora-scheduler -help`.
 
-Please refer to the [Operator Configuration Guide](operations/configuration.md) for details on how
+Please refer to the [Operator Configuration Guide](../operations/configuration.md) for details on how
 to properly set the most important options.
 
 ```

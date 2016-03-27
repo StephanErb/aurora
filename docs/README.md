@@ -64,7 +64,7 @@ All the information you need to start modifying Aurora and contributing back to 
      - [Client](development/client.md)
      - [Scheduler](development/scheduler.md)
      - [Scheduler UI](development/ui.md)
-     - [Thermos](development/client.md)
+     - [Thermos](development/thermos.md)
      - [Thrift structures](development/thrift.md)
 
 

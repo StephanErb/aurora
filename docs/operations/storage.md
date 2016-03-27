@@ -37,7 +37,7 @@ is [thrift](https://github.com/apache/thrift). Data is stored in serialized bina
 This helps establishing periodic recovery checkpoints and speeds up volatile storage recovery on
 restart.
 * Backup manager: as a precaution, snapshots are periodically written out into backup files.
-This solves a [disaster recovery problem](operations/backup-restore.md)
+This solves a [disaster recovery problem](backup-restore.md)
 in case of a complete loss or corruption of Mesos log files.
 
 ![Storage hierarchy](../images/storage_hierarchy.png)

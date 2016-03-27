@@ -5,9 +5,9 @@ Containers
 Docker
 ------
 
-Aurora has support for launching Docker containers, if correctly [configured by an Operator](operations/configuration.md#docker-containers).
+Aurora has support for launching Docker containers, if correctly [configured by an Operator](../operations/configuration.md#docker-containers).
 
-Example (available in the [Vagrant environment](getting-started/vagrant.md)):
+Example (available in the [Vagrant environment](../getting-started/vagrant.md)):
 
 
     $ cat /vagrant/examples/jobs/docker/hello_docker.aurora

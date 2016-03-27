@@ -62,7 +62,7 @@ relevant to uptime calculations. By applying a special "SLA meaning" to exposed 
 transition records, we can build a deterministic downtime trace for every given service instance.
 
 A task going through a state transition carries one of three possible SLA meanings
-(see [SlaAlgorithm.java](../src/main/java/org/apache/aurora/scheduler/sla/SlaAlgorithm.java) for
+(see [SlaAlgorithm.java](../../src/main/java/org/apache/aurora/scheduler/sla/SlaAlgorithm.java) for
 sla-to-task-state mapping):
 
 * Task is UP: starts a period where the task is considered to be up and running from the Aurora
@@ -109,7 +109,7 @@ metric that helps track the dependency of scheduling performance on the requeste
 * Per job - `sla_<job_key>_mtta_ms`
 * Per cluster - `sla_cluster_mtta_ms`
 * Per instance size (small, medium, large, x-large, xx-large). Size are defined in:
-[ResourceAggregates.java](../src/main/java/org/apache/aurora/scheduler/base/ResourceAggregates.java)
+[ResourceAggregates.java](../../src/main/java/org/apache/aurora/scheduler/base/ResourceAggregates.java)
   * By CPU:
     * `sla_cpu_small_mtta_ms`
     * `sla_cpu_medium_mtta_ms`
@@ -145,7 +145,7 @@ reflecting on the overall time it takes for the Aurora/Mesos to start executing 
 * Per job - `sla_<job_key>_mttr_ms`
 * Per cluster - `sla_cluster_mttr_ms`
 * Per instance size (small, medium, large, x-large, xx-large). Size are defined in:
-[ResourceAggregates.java](../src/main/java/org/apache/aurora/scheduler/base/ResourceAggregates.java)
+[ResourceAggregates.java](../../src/main/java/org/apache/aurora/scheduler/base/ResourceAggregates.java)
   * By CPU:
     * `sla_cpu_small_mttr_ms`
     * `sla_cpu_medium_mttr_ms`

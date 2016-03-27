@@ -16,14 +16,14 @@ Aurora is built for users _and_ operators.
 
 * User-facing Features:
   - Management of [long-running services](docs/features/services.md)
-  - [Cron scheduling](docs/features/cron-scheduling.md)
+  - [Cron jobs](docs/features/cron-jobs.md)
   - [Resource quotas](docs/features/multitenancy.md): provide guaranteed resources for specific
     applications
   - [Rolling job updates](docs/features/job-updates.md), with automatic rollback
   - [Multi-user support](docs/features/multitenancy.md)
   - Sophisticated [DSL](docs/reference/configuration-tutorial.md): supports templating, allowing you to
     establish common patterns and avoid redundant configurations
-  - [Dedicated machines](docs/deploying-aurora-scheduler.md#dedicated-attribute):
+  - [Dedicated machines](docs/features/constraints.md#dedicated-attribute):
     for things like stateful services that must always run on the same machines
   - [Service registration](docs/features/service-discovery.md): announce services in
     [ZooKeeper](http://zookeeper.apache.org/) for discovery by [various clients](docs/additional-resources/tools.md)

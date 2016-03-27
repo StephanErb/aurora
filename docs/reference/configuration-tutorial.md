@@ -7,7 +7,7 @@ and best practices. When writing a configuration file, make use of
 arguments as `aurora job create` or `aurora update start`. It first ensures the
 configuration parses, then outputs it in human-readable form.
 
-You should read this after going through the general [Aurora Tutorial](getting-started/tutorial.md).
+You should read this after going through the general [Aurora Tutorial](../getting-started/tutorial.md).
 
 - [The Basics](#user-content-the-basics)
 	- [Use Bottom-To-Top Object Ordering](#user-content-use-bottom-to-top-object-ordering)
@@ -57,7 +57,7 @@ Reference*](configuration-reference.md), without `import` statements - the
 Aurora config loader injects them automatically. Other than that, an `.aurora`
 file works like any other Python script.
 
-[*Aurora Configuration Reference*](reference/configuration.md)
+[*Aurora Configuration Reference*](configuration.md)
 has a full reference of all Aurora/Thermos defined Pystachio objects.
 
 ### Use Bottom-To-Top Object Ordering
@@ -215,7 +215,7 @@ above multiple `Process` definitions into just two.
 
     run_task = SequentialTask(processes = [stage, run])
 
-`Process` also has optional attributes to customize its behaviour. Details can be found in the [Aurora Configuration Reference](reference/configuration.md#process-objects).
+`Process` also has optional attributes to customize its behaviour. Details can be found in the [Aurora Configuration Reference](configuration.md#process-objects).
 
 
 ## Getting Your Code Into The Sandbox
@@ -276,7 +276,7 @@ A basic Task definition looks like:
                             ram = 1*GB,
                             disk = 1*GB))
 
-A Task has optional attributes to customize its behaviour. Details can be found in the [Aurora Configuration Reference](reference/configuration.md#task-object)
+A Task has optional attributes to customize its behaviour. Details can be found in the [Aurora Configuration Reference](configuration.md#task-object)
 
 
 ### SequentialTask: Running Processes in Parallel or Sequentially
@@ -433,7 +433,7 @@ default. For these four parameters, a Job definition might look like:
               task = foo_task)
 
 In addition to the required attributes, there are several optional
-attributes. Details can be found in the [Aurora Configuration Reference](reference/configuration.md#job-objects).
+attributes. Details can be found in the [Aurora Configuration Reference](configuration.md#job-objects).
 
 
 ## The jobs List

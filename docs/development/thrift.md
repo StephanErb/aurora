@@ -6,7 +6,7 @@ client/server RPC protocol as well as for internal data storage. While Thrift is
 correctly handling additions and renames of the existing members, field removals must be done
 carefully to ensure backwards compatibility and provide predictable deprecation cycle. This
 document describes general guidelines for making Thrift schema changes to the existing fields in
-[api.thrift](../api/src/main/thrift/org/apache/aurora/gen/api.thrift).
+[api.thrift](../../api/src/main/thrift/org/apache/aurora/gen/api.thrift).
 
 It is highly recommended to go through the
 [Thrift: The Missing Guide](http://diwakergupta.github.io/thrift-missing-guide/) first to refresh on
@@ -33,7 +33,7 @@ communicate with scheduler/client from vCurrent-1.
 * Add a new field as an eventual replacement of the old one and implement a dual read/write
 anywhere the old field is used. If a thrift struct is mapped in the DB store make sure both columns
 are marked as `NOT NULL`
-* Check [storage.thrift](../api/src/main/thrift/org/apache/aurora/gen/storage.thrift) to see if the
+* Check [storage.thrift](../../api/src/main/thrift/org/apache/aurora/gen/storage.thrift) to see if the
 affected struct is stored in Aurora scheduler storage. If so, you most likely need to backfill
 existing data to ensure both fields are populated eagerly on startup. See
 [this patch](https://reviews.apache.org/r/43172) as a real-life example of thrift-struct
@@ -52,6 +52,6 @@ Testing
 -------
 It's always advisable to test your changes in the local vagrant environment to build more
 confidence that you change is backwards compatible. It's easy to simulate different
-client/scheduler versions by playing with `aurorabuild` command. See [this document](getting-started/vagrant.md)
+client/scheduler versions by playing with `aurorabuild` command. See [this document](../getting-started/vagrant.md)
 for more.
 
