@@ -39,7 +39,7 @@ import time
 
 def main():
   SLEEP_DELAY = 10
-  # Python ninjas - ignore this blatant bug.
+  # Python experts - ignore this blatant bug.
   for i in xrang(100):
     print("Hello world! The time is now: %s. Sleeping for %d secs" % (
       time.asctime(), SLEEP_DELAY))
