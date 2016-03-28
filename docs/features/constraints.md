@@ -1,27 +1,94 @@
 Scheduling Constraints
 ======================
-TODO
 
-(copy & paste dump below)
+By default, Aurora will pick any random slave with sufficient resources
+in order to schedule a task. This scheduling choice can be further
+restricted with the help of constraints.
 
-### Running stateful services
+
+Mesos Attributes
+----------------
+
+Data centers are often organized with hierarchical failure domains.  Common failure domains
+include hosts, racks, rows, and PDUs.  If you have this information available, it is wise to tag
+the Mesos slave with them as
+[attributes](https://mesos.apache.org/documentation/attributes-resources/).
+
+The Mesos slave `--attributes` command line argument can be used to mark slaves with
+static key/value pairs, so called attributes (not to be confused with `--resources`, which are
+dynamic and accounted).
+
+For example, consider the host `cluster1-aaa-03-sr2` and its following attributes (given in
+key:value format): `host:cluster1-aaa-03-sr2` and `rack:aaa`.
+
+Aurora makes these attributes available for matching with scheduling constraints.
+
+
+Limit Constraints
+-----------------
+
+Limit constraints allow to control machine diversity using constraints. The below
+constraint ensures that no more than two instances of your job may run on a single host.
+Think of this as a "group by" limit.
+
+    Service(
+      name = 'webservice',
+      role = 'www-data',
+      constraints = {
+        'host': 'limit:2',
+      }
+      ...
+    )
+
+
+Likewise, you can use constraints to control rack diversity, e.g. at
+most one task per rack:
+
+    constraints = {
+      'rack': 'limit:1',
+    }
+
+Use these constraints sparingly as they can dramatically reduce Tasks' schedulability.
+Further details are available in the reference documentation on
+[Scheduling Constraints](#specifying-scheduling-constraints).
+
+
+
+Value Constraints
+-----------------
+
+Value constraints can be used to express that a certain attribute with a certain value
+should be present on a Mesos slave. For example, the following job would only be
+scheduled on nodes that claim to have an `SSD` as their disk.
+
+    Service(
+      name = 'webservice',
+      role = 'www-data',
+      constraints = {
+        'disk': 'SSD',
+      }
+      ...
+    )
+
+
+Further details are available in the reference documentation on
+[Scheduling Constraints](#specifying-scheduling-constraints).
+
+
+Running stateful services
+-------------------------
+
 Aurora is best suited to run stateless applications, but it also accommodates for stateful services
 like databases, or services that otherwise need to always run on the same machines.
 
-#### Dedicated attribute
-The Mesos slave has the `--attributes` command line argument which can be used to mark a slave with
-static attributes (not to be confused with `--resources`, which are dynamic and accounted).
+### Dedicated attribute
 
-Aurora makes these attributes available for matching with scheduling
-[constraints](../reference/configuration.md#specifying-scheduling-constraints).  Most of these
-constraints are arbitrary and available for custom use.  There is one exception, though: the
-`dedicated` attribute.  Aurora treats this specially, and only allows matching jobs to run on these
-machines, and will only schedule matching jobs on these machines.
+Most of the Mesos attributes arbitrary and available for custom use.  There is one exception,
+though: the `dedicated` attribute.  Aurora treats this specially, and only allows matching jobs to
+run on these machines, and will only schedule matching jobs on these machines.
 
-See the [section](multitenancy.md) about resource quotas to learn how quotas apply to
-dedicated jobs.
 
-##### Syntax
+#### Syntax
 The dedicated attribute has semantic meaning. The format is `$role(/.*)?`. When a job is created,
 the scheduler requires that the `$role` component matches the `role` field in the job
 configuration, and will reject the job creation otherwise.  The remainder of the attribute is
@@ -56,21 +123,4 @@ And this job configuration:
 The job configuration is indicating that it should only be scheduled on slaves with the attribute
 `dedicated:db_team/redis`.  Additionally, Aurora will prevent any tasks that do _not_ have that
 constraint from running on those slaves.
-
-
-
-
-## Best practices
-### Diversity
-Data centers are often organized with hierarchical failure domains.  Common failure domains
-include hosts, racks, rows, and PDUs.  If you have this information available, it is wise to tag
-the mesos-slave with them as
-[attributes](https://mesos.apache.org/documentation/attributes-resources/).
-
-When it comes time to schedule jobs, Aurora will automatically spread them across the failure
-domains as specified in the
-[job configuration](../reference/configuration.md#specifying-scheduling-constraints).
-
-Note: in virtualized environments like EC2, the only attribute that usually makes sense for this
-purpose is `host`.
 

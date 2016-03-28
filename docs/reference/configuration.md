@@ -514,11 +514,6 @@ Specifying Scheduling Constraints
 In the `Job` object there is a map `constraints` from String to String
 allowing the user to tailor the schedulability of tasks within the job.
 
-Each slave in the cluster is assigned a set of string-valued
-key/value pairs called attributes. For example, consider the host
-`cluster1-aaa-03-sr2` and its following attributes (given in key:value
-format): `host:cluster1-aaa-03-sr2` and `rack:aaa`.
-
 The constraint map's key value is the attribute name in which we
 constrain Tasks within our Job. The value is how we constrain them.
 There are two types of constraints: *limit constraints* and *value
@@ -529,22 +524,8 @@ constraints*.
 | Limit         | A string that specifies a limit for a constraint. Starts with <code>'limit:</code> followed by an Integer and closing single quote, such as ```'limit:1'```.
 | Value         | A string that specifies a value for a constraint. To include a list of values, separate the values using commas. To negate the values of a constraint, start with a ```!``` ```.```
 
-You can also control machine diversity using constraints. The below
-constraint ensures that no more than two instances of your job may run
-on a single host. Think of this as a "group by" limit.
-
-    constraints = {
-      'host': 'limit:2',
-    }
-
-Likewise, you can use constraints to control rack diversity, e.g. at
-most one task per rack:
-
-    constraints = {
-      'rack': 'limit:1',
-    }
-
-Use these constraints sparingly as they can dramatically reduce Tasks' schedulability.
+Further details can be found in the [Scheduling Constraints](../features/constraints) feature
+description.
 
 
 Template Namespaces

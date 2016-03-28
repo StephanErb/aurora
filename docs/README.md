@@ -1,8 +1,11 @@
 ## Introduction
 
-Apache Aurora is a service scheduler that runs on top of Apache Mesos, enabling you to run long-running services and cron jobs that take advantage of Apache Mesos' scalability, fault-tolerance, and resource isolation.
+Apache Aurora is a service scheduler that runs on top of Apache Mesos, enabling you to run
+long-running services, cron jobs, and ad-hoc jobs that take advantage of Apache Mesos' scalability,
+fault-tolerance, and resource isolation.
 
-We encourage you to ask questions on the [Aurora user list](http://aurora.apache.org/community/) or the `#aurora` IRC channel on `irc.freenode.net`.
+We encourage you to ask questions on the [Aurora user list](http://aurora.apache.org/community/) or
+the `#aurora` IRC channel on `irc.freenode.net`.
 
 
 ## Getting Started
@@ -40,7 +43,7 @@ The complete reference of commands, configuration options, and scheduler interna
 
  * [Task lifecycle](reference/task-lifecycle.md)
  * Configuration (`.aurora` files)
-    - [Configuration Reference](reference/configuration-reference.md)
+    - [Configuration Reference](reference/configuration.md)
     - [Configuration Tutorial](reference/configuration-tutorial.md)
     - [Configuration Best Practices](reference/configuration-best-bractices.md)
     - [Configuration Templating](reference/configuration-templating.md)
