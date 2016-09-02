@@ -97,9 +97,8 @@ Configuration options for the Aurora scheduler backup manager.
 
 ## Resource Isolation
 
-For CPU, memory, and disk isolation acccording to our enduser
-[documentation](../features/resource-isolation.md) we recommend to add the following isolators to
-the `--isolation` flag of the Mesos agent:
+For proper CPU, memory, and disk isolation as mentioned in our [enduser documentation](../features/resource-isolation.md),
+we recommend to add the following isolators to the `--isolation` flag of the Mesos agent:
 
 * `cgroups/cpu`
 * `cgroups/mem`
@@ -113,12 +112,22 @@ In addition, we recommend to set the following [agent flags](http://mesos.apache
   feature.
 * `--enforce_container_disk_quota` to enable disk quota enforcement for containers.
 
-In order to enable GPU support in Mesos, please see the GPU related flags in the
+To enable the optional GPU support in Mesos, please see the GPU related flags in the
 [Mesos configuration](http://mesos.apache.org/documentation/latest/configuration/).
-To enable the corresponding GPU support in Aurora, you have to start the scheduler with the
+To enable the corresponding feature in Aurora, you have to start the scheduler with the
 flag
 
     -allow_gpu_resource=true
+
+If you want to use revocable resources, first follow the
+[Mesos oversubscription documentation](http://mesos.apache.org/documentation/latest/oversubscription/)
+and then set set this Aurora scheduler flag to allow receiving revocable Mesos offers:
+
+    -receive_revocable_resources=true
+
+and specify a tier configuration file path (unless you want to use the [default](../../src/main/resources/org/apache/aurora/scheduler/tiers.json)):
+
+    -tier_config=path/to/tiers/config.json
 
 
 ## Thermos Process Logs
