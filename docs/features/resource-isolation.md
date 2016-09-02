@@ -11,23 +11,28 @@ Isolation
 
 Aurora is a multi-tenant system; a single software instance runs on a
 server, serving multiple clients/tenants. To share resources among
-tenants, it implements isolation of:
+tenants, it leverages Mesos for isolation of:
 
 * CPU
+* GPU
 * memory
 * disk space
+* ports
 
 CPU is a soft limit, and handled differently from memory and disk space.
 Too low a CPU value results in throttling your application and
 slowing it down. Memory and disk space are both hard limits; when your
 application goes over these values, it's killed.
 
+The following description assumes that Aurora and Mesos have been configured
+using our [recommended resource isolation settings](../operations/configuration.md#resource-isolation).
+
 ### CPU Isolation
 
-Mesos uses a quota based CPU scheduler (the *Completely Fair Scheduler*)
-to provide consistent and predictable performance.  This is effectively
-a guarantee of resources -- you receive at least what you requested, but
-also no more than you've requested.
+Mesos can be configured to use a quota based CPU scheduler (the *Completely*
+*Fair Scheduler*) to provide consistent and predictable performance.
+This is effectively a guarantee of resources -- you receive at least what
+you requested, but also no more than you've requested.
 
 The scheduler gives applications a CPU quota for every 100 ms interval.
 When an application uses its quota for an interval, it is throttled for
@@ -103,11 +108,11 @@ will be killed shortly after. This is subject to change.
 
 ### GPU Isolation
 
-GPU isolation will be supported for Nvidia devices starting from Mesos 0.29.0.
+GPU isolation will be supported for Nvidia devices starting from Mesos 1.0.
 Access to the allocated units will be exclusive with no sharing between tasks
-allowed (e.g. no fractional GPU allocation). Until official documentation is released,
-see [Mesos design document](https://docs.google.com/document/d/10GJ1A80x4nIEo8kfdeo9B11PIbS1xJrrB4Z373Ifkpo/edit#heading=h.w84lz7p4eexl)
-for more details.
+allowed (e.g. no fractional GPU allocation). For more details, see the
+[Mesos design document](https://docs.google.com/document/d/10GJ1A80x4nIEo8kfdeo9B11PIbS1xJrrB4Z373Ifkpo/edit#heading=h.w84lz7p4eexl)
+and the [Mesos agent configuration](http://mesos.apache.org/documentation/latest/configuration/).
 
 ### Other Resources
 
@@ -153,6 +158,7 @@ into the application's sandbox space.
 
 GPU is highly dependent on your application requirements and is only limited
 by the number of physical GPU units available on a target box.
+
 
 Oversubscription
 ----------------
