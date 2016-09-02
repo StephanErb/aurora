@@ -90,27 +90,22 @@ or truncating of the replicated log used by Aurora. In that case, see the docume
 
 Configuration options for the Aurora scheduler backup manager.
 
-### `-backup_interval`
-The interval on which the scheduler writes local storage backups.  The default is every hour.
-
-### `-backup_dir`
-Directory to write backups to.
-
-### `-max_saved_backups`
-Maximum number of backups to retain before deleting the oldest backup(s).
+*  `-backup_interval`: The interval on which the scheduler writes local storage backups.  The default is every hour.
+*  `-backup_dir`: Directory to write backups to.
+* `-max_saved_backups`: Maximum number of backups to retain before deleting the oldest backup(s).
 
 
 ## Resource Isolation
 
-Aurora relies on Mesos for resource accounting and isolation. For CPU, memory, and disk isolation
-acccording to our enduser [documentation](../features/resource-isolation.md) we recommend to add the
-following isolators to the `--isolation` flag of the Mesos agent:
+For CPU, memory, and disk isolation acccording to our enduser
+[documentation](../features/resource-isolation.md) we recommend to add the following isolators to
+the `--isolation` flag of the Mesos agent:
 
 * `cgroups/cpu`
 * `cgroups/mem`
 * `disk/du`
 
-In addition, we recommend to set the following agent flags:
+In addition, we recommend to set the following [agent flags](http://mesos.apache.org/documentation/latest/configuration/):
 
 * `--cgroups_limit_swap` to enable memory limits on both memory and swap instead of just memory.
   Alternatively, you could disable swap on your agent hosts.
@@ -119,9 +114,11 @@ In addition, we recommend to set the following agent flags:
 * `--enforce_container_disk_quota` to enable disk quota enforcement for containers.
 
 In order to enable GPU support in Mesos, please see the GPU related flags in the
-[Mesos agent configuration](http://mesos.apache.org/documentation/latest/configuration/).
+[Mesos configuration](http://mesos.apache.org/documentation/latest/configuration/).
 To enable the corresponding GPU support in Aurora, you have to start the scheduler with the
-flag `-allow_gpu_resource`.
+flag
+
+    -allow_gpu_resource=true
 
 
 ## Thermos Process Logs

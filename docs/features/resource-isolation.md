@@ -1,6 +1,9 @@
 Resources Isolation and Sizing
 ==============================
 
+This document assumes Aurora and Mesos have been configured
+using our [recommended resource isolation settings](../operations/configuration.md#resource-isolation).
+
 - [Isolation](#isolation)
 - [Sizing](#sizing)
 - [Oversubscription](#oversubscription)
@@ -23,9 +26,6 @@ CPU is a soft limit, and handled differently from memory and disk space.
 Too low a CPU value results in throttling your application and
 slowing it down. Memory and disk space are both hard limits; when your
 application goes over these values, it's killed.
-
-The following description assumes that Aurora and Mesos have been configured
-using our [recommended resource isolation settings](../operations/configuration.md#resource-isolation).
 
 ### CPU Isolation
 
