@@ -125,7 +125,8 @@ and then set set this Aurora scheduler flag to allow receiving revocable Mesos o
 
     -receive_revocable_resources=true
 
-and specify a tier configuration file path (unless you want to use the [default](../../src/main/resources/org/apache/aurora/scheduler/tiers.json)):
+Unless you want to use the [default](../../src/main/resources/org/apache/aurora/scheduler/tiers.json)
+tier configuration, you will also have to specify a file path:
 
     -tier_config=path/to/tiers/config.json
 

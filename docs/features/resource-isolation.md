@@ -163,19 +163,19 @@ by the number of physical GPU units available on a target box.
 Oversubscription
 ----------------
 
-Mesos [supports a concept of revocable tasks](http://mesos.apache.org/documentation/latest/oversubscription/)
-by oversubscribing machine resources by an amount deemed safe to not affect existing high-priority
-user-facing services. In contrast to non-revocable tasks, revocable tasks are best-effort. Mesos
-reserves the right to throttle or even kill them if necessary.
+Mesos supports [oversubscription of machine resources](http://mesos.apache.org/documentation/latest/oversubscription/)
+via the concept of revocable tasks. In contrast to non-revocable tasks, revocable tasks are best-effort.
+Mesos reserves the right to throttle or even kill them if they might affect existing high-priority
+user-facing services.
 
 As of today, the only revocable resource supported by Aurora are CPU resources. A job can opt-in to
 use those by specifying the `revocable` [Configuration Tier](../features/multitenancy.md#configuration-tiers).
-It will then only be scheduled using revocable CPU resources, even if there are plenty non-revocable
-resources available.
+A revocable job will only be scheduled using revocable CPU resources, even if there are plenty of
+non-revocable resources available.
 
-The Aurora scheduler must be configured to receive revocable offers from Mesos and accept revocable
-jobs. If not configured properly revocable tasks will never get assigned to hosts and will stay in
-`PENDING`.
+The Aurora scheduler must be [configured to receive revocable offers](../operations/configuration.md#resource-isolation)
+from Mesos and accept revocable jobs. If not configured properly revocable tasks will never get
+assigned to hosts and will stay in `PENDING`.
 
 For details on how to mark a job as being revocable, see the
 [Configuration Reference](../reference/configuration.md).
