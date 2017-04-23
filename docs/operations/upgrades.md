@@ -32,8 +32,8 @@ To upgrade Aurora, follow these steps:
 
 Even though not absolutely mandatory, we advice to adhere to the following rules:
 
-* Never skip any major or minor releases when updating. Skipping bugfix releases is acceptable though.
-  If you have to catch up several releases you have to deploy all intermediary versions.
+* Never skip any major or minor releases when updating. If you have to catch up several releases you
+  have to deploy all intermediary versions. Skipping bugfix releases is acceptable though.
 * Verify all updates on a test cluster before touching your production deployments.
 * To minimize the number of failovers during updates, update the currently leading scheduler
   instance last.
