@@ -1,8 +1,6 @@
 # Aurora Scheduler Storage
 
 - [Overview](#overview)
-- [Replicated Log Configuration](#replicated-log-configuration)
-- [Backup Configuration](#replicated-log-configuration)
 - [Storage Semantics](#storage-semantics)
   - [Reads, writes, modifications](#reads-writes-modifications)
     - [Read lifecycle](#read-lifecycle)

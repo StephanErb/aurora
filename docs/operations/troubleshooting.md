@@ -89,7 +89,7 @@ to `FAILED` or `LOST`.
 
 ### Solution
 The executor might be failing due to unknown internal errors such as a missing native dependency
-of the Mesos executor libraries. Open the Mesos UI and navigate to the failing
+of the Mesos executor library. Open the Mesos UI and navigate to the failing
 task in question. Inspect the various log files in order to learn about what is going on.
 
 

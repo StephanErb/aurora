@@ -37,7 +37,7 @@ Like Mesos, Aurora uses command-line flags for runtime configuration. As such th
 That way Aurora's current flags are visible in `ps` and in the `/vars` admin endpoint.
 
 
-# JVM Configuration
+## JVM Configuration
 
 JVM settings are dependent on your environment and cluster size. They might require
 custom tuning. As a starting point, we recommend:
@@ -51,7 +51,7 @@ custom tuning. As a starting point, we recommend:
 
 ## Network Configuration
 
-By default, Aurora bind to all interfaces and auto-discover its hostname. To reduce ambiguity
+By default, Aurora binds to all interfaces and auto-discovers its hostname. To reduce ambiguity
 it helps to hardcode them though:
 
     -http_port=8081
@@ -173,19 +173,18 @@ tier configuration, you will also have to specify a file path:
     -tier_config=path/to/tiers/config.json
 
 
-# Multi-Framework Setup
+## Multi-Framework Setup
 
 Aurora holds onto Mesos offers in order to provide efficient scheduling and
 [preemption](../features/multitenancy.md#preemption). This is problematic in multi-framework
 environments as Aurora might starve other frameworks.
 
-With a downside of increased scheduling latency, Aurora can be configured play better with other
-frameworks:
+With a downside of increased scheduling latency, Aurora can be configured to be more cooperative:
 
-* Lowering `-min_offer_hold_time` (e.g. to `1min`) can ensure unused offers are returned back to
+* Lowering `-min_offer_hold_time` (e.g. to `1mins`) can ensure unused offers are returned back to
   Mesos more frequently.
 * Increasing `-offer_filter_duration` (e.g to `30secs`) will instruct Mesos
-  not to reoffer rejected resources for the given duration.
+  not to re-offer rejected resources for the given duration.
 
 Setting a [minimum amount of resources](http://mesos.apache.org/documentation/latest/quota/) for
 each Mesos role can furthermore help to ensure no framework is starved entirely.
