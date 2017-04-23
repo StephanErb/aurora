@@ -21,8 +21,9 @@ For example:
 * Production resource quotas
 * Mesos resource offer host attributes
 
-Aurora solves its persistence needs by leveraging the Mesos implementation of a Paxos replicated
-log [[1]](https://ramcloud.stanford.edu/~ongaro/userstudy/paxos.pdf)
+Aurora solves its persistence needs by leveraging the
+[Mesos implementation of a Paxos replicated log](http://mesos.apache.org/documentation/latest/replicated-log-internals/)
+[[1]](https://ramcloud.stanford.edu/~ongaro/userstudy/paxos.pdf)
 [[2]](http://en.wikipedia.org/wiki/State_machine_replication) with a key-value
 [LevelDB](https://github.com/google/leveldb) storage as persistence media.
 

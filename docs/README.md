@@ -35,6 +35,8 @@ For those that wish to manage and fine-tune an Aurora cluster.
 
  * [Installation](operations/installation.md)
  * [Configuration](operations/configuration.md)
+ * [Upgrades](operations/upgrades.md)
+ * [Troubleshooting](operations/troubleshooting.md)
  * [Monitoring](operations/monitoring.md)
  * [Security](operations/security.md)
  * [Storage](operations/storage.md)
