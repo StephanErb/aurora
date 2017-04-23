@@ -1,7 +1,7 @@
 # HTTP endpoints
 
 There are a number of HTTP endpoints that the Aurora scheduler exposes. These allow various
-operational tasks to be performed on the scheduler. Below is the list of all such endpoints
+operational tasks to be performed on the scheduler. Below is an (incomplete) list of such endpoints
 and a brief explanation of what they do.
 
 ## Leader health

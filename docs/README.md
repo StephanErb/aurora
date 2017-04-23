@@ -57,6 +57,7 @@ The complete reference of commands, configuration options, and scheduler interna
     - [Client Cluster Configuration](reference/client-cluster-configuration.md)
  * [Scheduler Configuration](reference/scheduler-configuration.md)
  * [Observer Configuration](reference/observer-configuration.md)
+ * [Endpoints](reference/scheduler-endpoints.md)
 
 ## Additional Resources
  * [Tools integrating with Aurora](additional-resources/tools.md)
