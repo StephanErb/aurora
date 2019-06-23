@@ -1,10 +1,9 @@
 dist: xenial
-language: python
-python:
-- '2.7'
+language: java
+jdk:
+- 'openjdk8'
 
 script:
-- jdk_switcher use openjdk8
 - TERM=dumb ./build-support/jenkins/build.sh
 
 cache:
