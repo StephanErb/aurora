@@ -5,8 +5,6 @@ python:
 
 script:
 - jdk_switcher use openjdk8
-
-script:
 - TERM=dumb ./build-support/jenkins/build.sh
 
 cache:
